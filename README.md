@@ -1,5 +1,5 @@
 # Azure - Storage Account Module
-This module will create a storage account associated with network security rule.
+This module will create a storage account.
 
 Note that storage account name is not specified, a random name will be used.
 
