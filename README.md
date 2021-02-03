@@ -1,9 +1,7 @@
 # Azure - Storage Account Module
-This module will create a new storage account associated with network security rule. Provide all the subnets (i.e. `authorized_subnets`) that required access to the storage account.
+This module will create a storage account associated with network security rule.
 
-Note that storage account name is randomly generated and tagged with 
-
-`sa-{resource_group_type}-{product_name}-{environment}-{location}`
+Note that storage account name is not specified, a random name will be used.
 
 <!--- BEGIN_TF_DOCS --->
 ## Requirements
