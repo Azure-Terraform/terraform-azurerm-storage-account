@@ -1,8 +1,6 @@
 # Azure - Storage Account Module
 This module will create a storage account.
 
-Note that storage account name is not specified, a random name will be used.
-
 <!--- BEGIN_TF_DOCS --->
 ## Requirements
 
