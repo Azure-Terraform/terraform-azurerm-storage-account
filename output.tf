@@ -23,9 +23,19 @@ output "primary_blob_endpoint" {
   description = "The endpoint URL for blob storage in the primary location."
 }
 
+output "primary_blob_host" {
+  value       = azurerm_storage_account.sa.primary_blob_host
+  description = "The endpoint host for blob storage in the primary location."
+}
+
 output "secondary_blob_endpoint" {
   value       = azurerm_storage_account.sa.secondary_blob_endpoint
   description = "The endpoint URL for blob storage in the secondary location."
+}
+
+output "secondary_blob_host" {
+  value       = azurerm_storage_account.sa.secondary_blob_host
+  description = "The endpoint host for blob storage in the secondary location."
 }
 
 output "primary_queue_endpoint" {
