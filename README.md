@@ -45,6 +45,7 @@ No requirements.
 | name | The name of the Storage Account. |
 | primary\_access\_key | The primary access key for the storage account. |
 | primary\_blob\_endpoint | The endpoint URL for blob storage in the primary location. |
+| primary\_blob\_host | The endpoint host for blob storage in the primary location. |
 | primary\_connection\_string | The connection string associated with the primary location. |
 | primary\_dfs\_endpoint | The endpoint URL for DFS storage in the primary location. |
 | primary\_file\_endpoint | The endpoint URL for file storage in the primary location. |
@@ -53,6 +54,7 @@ No requirements.
 | primary\_web\_endpoint | The endpoint URL for web storage in the primary location. |
 | secondary\_access\_key | The secondary access key for the storage account. |
 | secondary\_blob\_endpoint | The endpoint URL for blob storage in the secondary location. |
+| secondary\_blob\_host | The endpoint host for blob storage in the secondary location. |
 | secondary\_connection\_string | The connection string associated with the secondary location. |
 | secondary\_dfs\_endpoint | The endpoint URL for DFS storage in the secondary location. |
 | secondary\_file\_endpoint | The endpoint URL for file storage in the secondary location. |
