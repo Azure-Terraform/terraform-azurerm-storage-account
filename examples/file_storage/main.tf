@@ -2,14 +2,14 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=2.41.0"
+      version = "=2.53.0"
     }
     random = {
       source  = "hashicorp/random"
       version = "=2.3.0"
     }
   }
-   required_version = ">=0.13.5"
+  required_version = ">=0.14.8"
 }
 
 provider "azurerm" {
@@ -30,7 +30,7 @@ resource "random_string" "random" {
 }
 
 module "subscription" {
-  source = "github.com/Azure-Terraform/terraform-azurerm-subscription-data.git?ref=v1.0.0"
+  source          = "github.com/Azure-Terraform/terraform-azurerm-subscription-data.git?ref=v1.0.0"
   subscription_id = data.azurerm_subscription.current.subscription_id
 }
 
@@ -64,7 +64,7 @@ module "resource_group" {
 }
 
 module "virtual_network" {
-  source = "github.com/Azure-Terraform/terraform-azurerm-virtual-network.git?ref=v2.2.0"
+  source = "github.com/Azure-Terraform/terraform-azurerm-virtual-network.git?ref=v2.6.0"
 
   naming_rules = module.naming.yaml
 
@@ -76,37 +76,32 @@ module "virtual_network" {
   address_space = ["10.1.1.0/24"]
 
   subnets = {
-    "iaas-outbound" = { cidrs             = ["10.1.1.0/27"]
-                        service_endpoints = ["Microsoft.Storage"] }
+    iaas-outbound = {
+      cidrs             = ["10.1.1.0/27"]
+      service_endpoints = ["Microsoft.Storage"]
+    }
   }
 }
 
 module "storage_account" {
-  source = "../"
+  source = "../../"
 
   resource_group_name = module.resource_group.name
   location            = module.resource_group.location
   names               = module.metadata.names
   tags                = module.metadata.tags
 
-  account_kind     = "StorageV2"
-  replication_type = "LRS"
+  account_kind             = "FileStorage"
+  replication_type         = "LRS"
+  account_tier             = "Premium"
+  access_tier              = "Hot"
+  enable_large_file_share  = true
 
   access_list = {
-    "my_ip"      = chomp(data.http.my_ip.body)
+    "my_ip" = chomp(data.http.my_ip.body)
   }
 
   service_endpoints = {
     "iaas-outbound" = module.virtual_network.subnet["iaas-outbound"].id
-  }
-
-  blob_cors = {
-    test = {
-      allowed_headers    = []
-      allowed_methods    = ["GET","DELETE"]
-      allowed_origins    = ["*"]
-      exposed_headers    = []
-      max_age_in_seconds = 5
-    }
   }
 }
