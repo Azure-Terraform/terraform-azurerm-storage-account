@@ -18,11 +18,11 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | access\_list | Map of CIDRs Storage Account access. | `map(string)` | `{}` | no |
-| access\_tier | Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts (Hot or Cold). | `string` | `"Hot"` | no |
+| access\_tier | Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts | `string` | `"Hot"` | no |
 | account\_kind | Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2 | `string` | n/a | yes |
 | account\_tier | Defines the Tier to use for this storage account (Standard or Premium). | `string` | `null` | no |
 | allow\_blob\_public\_access | Allow or disallow public access to all blobs or containers in the storage account. | `bool` | `false` | no |
-| blob\_cors | blob service cors rules:  https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule | <pre>map(object({<br>                  allowed_headers    = list(string)<br>                  allowed_methods    = list(string)<br>                  allowed_origins    = list(string)<br>                  exposed_headers    = list(string)<br>                  max_age_in_seconds = number<br>                }))</pre> | `null` | no |
+| blob\_cors | blob service cors rules:  https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule | <pre>map(object({<br>    allowed_headers    = list(string)<br>    allowed_methods    = list(string)<br>    allowed_origins    = list(string)<br>    exposed_headers    = list(string)<br>    max_age_in_seconds = number<br>  }))</pre> | `null` | no |
 | blob\_delete\_retention\_days | Retention days for deleted blob. Valid value is between 1 and 365. | `number` | `7` | no |
 | enable\_hns | Enable Hierarchical Namespace (can be used with Azure Data Lake Storage Gen 2). | `bool` | `false` | no |
 | enable\_https\_traffic\_only | Forces HTTPS if enabled. | `bool` | `true` | no |
