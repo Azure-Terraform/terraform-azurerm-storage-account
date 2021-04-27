@@ -10,11 +10,13 @@ output "id" {
 
 output "primary_access_key" {
   value       = azurerm_storage_account.sa.primary_access_key
+  sensitive   = true
   description = "The primary access key for the storage account."
 }
 
 output "secondary_access_key" {
   value       = azurerm_storage_account.sa.secondary_access_key
+  sensitive   = true
   description = "The secondary access key for the storage account."
 }
 
@@ -90,10 +92,12 @@ output "secondary_web_endpoint" {
 
 output "primary_connection_string" {
   value       = azurerm_storage_account.sa.primary_connection_string
+  sensitive   = true
   description = "The connection string associated with the primary location."
 }
 
 output "secondary_connection_string" {
   value       = azurerm_storage_account.sa.secondary_connection_string
+  sensitive   = true
   description = "The connection string associated with the secondary location."
 }

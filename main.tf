@@ -5,14 +5,13 @@ locals {
 }
 
 resource "random_string" "random" {
-  count   = (var.name == null ? 1 : 0)
   length  = 24
   special = false
   upper   = false
 }
 
 resource "azurerm_storage_account" "sa" {
-  name                     = (var.name == null ? random_string.random[0].result : var.name)
+  name                     = (var.name == null ? random_string.random.result : var.name)
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_kind             = var.account_kind
