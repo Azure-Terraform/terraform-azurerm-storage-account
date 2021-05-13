@@ -84,7 +84,7 @@ module "virtual_network" {
 }
 
 module "storage_account" {
-  source = "../"
+  source = "../../"
 
   resource_group_name = module.resource_group.name
   location            = module.resource_group.location
