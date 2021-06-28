@@ -1,3 +1,9 @@
+output "sa" {
+  value       = azurerm_storage_account.sa
+  sensitive   = true
+  description = "The Storage Account object."
+}
+
 output "name" {
   value       = azurerm_storage_account.sa.name
   description = "The name of the Storage Account."
@@ -100,4 +106,14 @@ output "secondary_connection_string" {
   value       = azurerm_storage_account.sa.secondary_connection_string
   sensitive   = true
   description = "The connection string associated with the secondary location."
+}
+
+output "principal_id" {
+  value       = azurerm_storage_account.sa.identity.0.principal_id
+  description = "The Principal ID for the Service Principal associated with the Identity of this Storage Account."
+}
+
+output "tenant_id" {
+  value       = azurerm_storage_account.sa.identity.0.tenant_id
+  description = "The Tenant ID for the Service Principal associated with the Identity of this Storage Account."
 }
