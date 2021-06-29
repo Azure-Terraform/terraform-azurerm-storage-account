@@ -52,6 +52,8 @@ No requirements.
 | primary\_queue\_endpoint | The endpoint URL for queue storage in the primary location. |
 | primary\_table\_endpoint | The endpoint URL for table storage in the primary location. |
 | primary\_web\_endpoint | The endpoint URL for web storage in the primary location. |
+| principal\_id | The Principal ID for the Service Principal associated with the Identity of this Storage Account. |
+| sa | The Storage Account object. |
 | secondary\_access\_key | The secondary access key for the storage account. |
 | secondary\_blob\_endpoint | The endpoint URL for blob storage in the secondary location. |
 | secondary\_blob\_host | The endpoint host for blob storage in the secondary location. |
@@ -61,5 +63,6 @@ No requirements.
 | secondary\_queue\_endpoint | The endpoint URL for queue storage in the secondary location. |
 | secondary\_table\_endpoint | The endpoint URL for table storage in the secondary location. |
 | secondary\_web\_endpoint | The endpoint URL for web storage in the secondary location. |
+| tenant\_id | The Tenant ID for the Service Principal associated with the Identity of this Storage Account. |
 
 <!--- END_TF_DOCS --->
