@@ -28,25 +28,30 @@ variable "tags" {
 }
 
 variable "account_kind" {
-    description = "Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2"
-    type        = string
+  description = "Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2"
+  type        = string
 }
 
 variable "account_tier" {
-    description = "Defines the Tier to use for this storage account (Standard or Premium)."
-    type        = string
-    default     = null
-}
-
-variable "replication_type" {
-    description = "Storage account replication type - i.e. LRS, GRS, RAGRS, ZRS, GZRS, RAGZRS."
-    type        = string
+  description = "Defines the Tier to use for this storage account (Standard or Premium)."
+  type        = string
+  default     = null
 }
 
 variable "access_tier" {
-    description = "Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts (Hot or Cold)."
-    type        = string
-    default     = "Hot"
+  description = "Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts"
+  type        = string
+  default     = "Hot"
+
+  validation {
+    condition     = (contains(["hot", "cool"], lower(var.access_tier)))
+    error_message = "The account_tier must be either \"Hot\" or \"Cool\"."
+  }
+}
+
+variable "replication_type" {
+  description = "Storage account replication type - i.e. LRS, GRS, RAGRS, ZRS, GZRS, RAGZRS."
+  type        = string
 }
 
 variable "enable_large_file_share" {
@@ -56,7 +61,7 @@ variable "enable_large_file_share" {
 }
 
 variable "enable_hns" {
-  description = "Enable Hierarchical Namespace (can be used with Azure Data Lake Storage Gen 2)."	
+  description = "Enable Hierarchical Namespace (can be used with Azure Data Lake Storage Gen 2)."
   type        = bool
   default     = false
 }
@@ -74,9 +79,9 @@ variable "min_tls_version" {
 }
 
 variable "allow_blob_public_access" {
- description = "Allow or disallow public access to all blobs or containers in the storage account."
- type        = bool
- default     = false
+  description = "Allow or disallow public access to all blobs or containers in the storage account."
+  type        = bool
+  default     = false
 }
 
 # Note: make sure to include the IP address of the host from where "terraform" command is executed to allow for access to the storage
@@ -100,19 +105,19 @@ variable "traffic_bypass" {
 }
 
 variable "blob_delete_retention_days" {
-    description = "Retention days for deleted blob. Valid value is between 1 and 365."
-    type        = number
-    default     = 7
+  description = "Retention days for deleted blob. Valid value is between 1 and 365."
+  type        = number
+  default     = 7
 }
 
 variable "blob_cors" {
   description = "blob service cors rules:  https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule"
-  type        = map(object({
-                  allowed_headers    = list(string)
-                  allowed_methods    = list(string)
-                  allowed_origins    = list(string)
-                  exposed_headers    = list(string)
-                  max_age_in_seconds = number
-                }))
-  default     = null
+  type = map(object({
+    allowed_headers    = list(string)
+    allowed_methods    = list(string)
+    allowed_origins    = list(string)
+    exposed_headers    = list(string)
+    max_age_in_seconds = number
+  }))
+  default = null
 }
