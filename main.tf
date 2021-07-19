@@ -18,6 +18,7 @@ resource "azurerm_storage_account" "sa" {
   account_tier             = local.account_tier
   account_replication_type = var.replication_type
   access_tier              = var.access_tier
+  tags                     = var.tags
 
   is_hns_enabled           = var.enable_hns
   large_file_share_enabled = var.enable_large_file_share
