@@ -1,7 +1,8 @@
 locals {
   # Automatically set account tier for BlockBlobStorage/FileStorage if not specified.
   #   Not correcting incompatible type if specified to prevent user misunderstanding.
-  account_tier = (var.account_tier == null ? (var.account_kind == "BlockBlobStorage" || var.account_kind == "FileStorage" ? "Premium" : "Standard") : var.account_tier)
+  account_tier     = (var.account_tier == null ? (var.account_kind == "BlockBlobStorage" || var.account_kind == "FileStorage" ? "Premium" : "Standard") : var.account_tier)
+  subresource_name = var.private_link_subresource_name == "" ? (var.account_kind == "FileStorage" ? "file" : "blob") : var.private_link_subresource_name
 }
 
 resource "random_string" "random" {
@@ -63,3 +64,28 @@ resource "azurerm_storage_account_network_rules" "netrule" {
   bypass                     = var.traffic_bypass
 }
 
+module "private_links" {
+  source = "git::git@github.com:LexisNexis-RBA/terraform-azurerm-private-link-endpoint.git?ref=v1.0.2"
+  count  = var.private_link == {} ? 0 : 1
+
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  names               = var.names
+  tags                = var.tags
+
+  # enforce endpoint policy for subnet?
+  enforce_private_link_endpoint_network_policies = false
+  subnet_name                                    = var.private_link.subnet_name
+  subnet_resource_group_name                     = var.resource_group_name
+
+  # subnet info
+  subnet_virtual_network_name = var.private_link.vnet_name
+  vnet_resource_group_name    = var.resource_group_name
+
+  # private link info
+  virtual_network_id             = data.azurerm_virtual_network.vnet.id
+  subnet_id                      = data.azurerm_subnet.subnet.id
+  private_connection_resource_id = azurerm_storage_account.sa.id
+  dns_zone_name                  = var.private_link.dns_zone_name
+  subresource_name               = local.subresource_name
+}

@@ -77,8 +77,9 @@ module "virtual_network" {
 
   subnets = {
     iaas-outbound = {
-      cidrs             = ["10.1.1.0/27"]
-      service_endpoints = ["Microsoft.Storage"]
+      cidrs                                          = ["10.1.1.0/27"]
+      service_endpoints                              = ["Microsoft.Storage"]
+      enforce_private_link_endpoint_network_policies = true
     }
   }
 }
@@ -91,17 +92,15 @@ module "storage_account" {
   names               = module.metadata.names
   tags                = module.metadata.tags
 
-  account_kind             = "FileStorage"
-  replication_type         = "LRS"
-  account_tier             = "Premium"
-  access_tier              = "Hot"
-  enable_large_file_share  = true
+  account_kind            = "FileStorage"
+  replication_type        = "LRS"
+  account_tier            = "Premium"
+  access_tier             = "Hot"
+  enable_large_file_share = true
 
-  access_list = {
-    "my_ip" = chomp(data.http.my_ip.body)
-  }
-
-  service_endpoints = {
-    "iaas-outbound" = module.virtual_network.subnet["iaas-outbound"].id
+  private_link = {
+    subnet_name   = module.virtual_network.subnets["iaas-outbound"].name
+    vnet_name     = module.virtual_network.vnet.name
+    dns_zone_name = "example.file.storageaccount.privatelink.azure.com"
   }
 }
