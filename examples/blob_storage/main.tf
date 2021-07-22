@@ -77,8 +77,9 @@ module "virtual_network" {
 
   subnets = {
     iaas-outbound = {
-      cidrs             = ["10.1.1.0/27"]
-      service_endpoints = ["Microsoft.Storage"]
+      cidrs                                          = ["10.1.1.0/27"]
+      service_endpoints                              = ["Microsoft.Storage"]
+      enforce_private_link_endpoint_network_policies = true
     }
   }
 }
@@ -94,14 +95,6 @@ module "storage_account" {
   account_kind     = "StorageV2"
   replication_type = "LRS"
 
-  access_list = {
-    "my_ip" = chomp(data.http.my_ip.body)
-  }
-
-  service_endpoints = {
-    "iaas-outbound" = module.virtual_network.subnet["iaas-outbound"].id
-  }
-
   blob_cors = {
     test = {
       allowed_headers    = []
@@ -110,5 +103,11 @@ module "storage_account" {
       exposed_headers    = []
       max_age_in_seconds = 5
     }
+  }
+
+  private_link = {
+    subnet_name   = module.virtual_network.subnets["iaas-outbound"].name
+    vnet_name     = module.virtual_network.vnet.name
+    dns_zone_name = "example.blob.storageaccount.privatelink.azure.com"
   }
 }

@@ -98,6 +98,24 @@ variable "service_endpoints" {
   default     = {}
 }
 
+#Example Values
+# {
+#  subnet_name = ""
+#  vnet_name = ""
+#  dns_zone_name = ""
+#}
+variable "private_link" {
+  description = "When defined, enables private link endpoint on the ACR"
+  type        = map(string)
+  default     = {}
+}
+
+variable "private_link_subresource_name" {
+  description = "subresource to assign to private link. Defaults to 'file' for fileshare and 'blob' for blobstorage"
+  type        = string
+  default     = ""
+}
+
 variable "traffic_bypass" {
   description = "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None."
   type        = list(string)
@@ -121,3 +139,4 @@ variable "blob_cors" {
   }))
   default = null
 }
+
