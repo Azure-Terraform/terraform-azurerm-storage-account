@@ -92,7 +92,7 @@ resource "azurerm_storage_share_directory" "directory" {
   for_each = { for dir in local.share_dirs : join(".", [dir.share_key, dir.dir_key]) => dir }
 
   name                 = each.value.dir_key
-  share_name           = each.value.share_key
+  share_name           = azurerm_storage_share.share[each.value.share_key].name
   storage_account_name = azurerm_storage_account.sa.name
 }
 
@@ -102,9 +102,9 @@ resource "azurerm_storage_share_directory" "directory" {
 resource "azurerm_storage_share_file" "directory_file" {
   for_each = { for file in local.dir_files : join(".", [file.share_key, file.dir_key, file.file_key]) => file }
 
-  name                = each.value.file_key
-  storage_share_id    = azurerm_storage_share.share[each.value.share_key].id
-  path                = coalesce(each.value.path, each.value.dir_key)
+  name             = each.value.file_key
+  storage_share_id = azurerm_storage_share.share[each.value.share_key].id
+  path                = azurerm_storage_share_directory.directory[join(".", [each.value.share_key, each.value.dir_key])].name
   source              = each.value.source
   content_type        = each.value.content_type
   content_md5         = each.value.content_md5
