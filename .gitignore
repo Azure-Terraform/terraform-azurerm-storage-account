@@ -1,5 +1,6 @@
 **/*.tfvars
 .terraform.lock.hcl
+*.lock.info
 **/terraform.tfstate*
 **/.terraform
 **/crash.log

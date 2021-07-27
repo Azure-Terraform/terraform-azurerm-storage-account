@@ -104,4 +104,18 @@ module "storage_account" {
   service_endpoints = {
     "iaas-outbound" = module.virtual_network.subnet["iaas-outbound"].id
   }
+
+  shares = {
+    foo = {
+      dirs = {
+        config = {
+          files = {
+            "config.yml" = {
+              content_md5 = md5(yamlencode({"foo":[1, 2, 3], "bar": "baz"}))
+            }
+          }
+        }
+      }
+    }
+  }
 }
