@@ -2,6 +2,7 @@ locals {
   # Automatically set account tier for BlockBlobStorage/FileStorage if not specified.
   #   Not correcting incompatible type if specified to prevent user misunderstanding.
   account_tier = (var.account_tier == null ? (var.account_kind == "BlockBlobStorage" || var.account_kind == "FileStorage" ? "Premium" : "Standard") : var.account_tier)
+  static_website_enabled = (var.enable_static_website && (var.account_kind == "BlockBlobStorage" || var.account_kind == "StorageV2")) ? [{}] : []
 }
 
 resource "random_string" "random" {
@@ -50,6 +51,14 @@ resource "azurerm_storage_account" "sa" {
           max_age_in_seconds = cors_rule.value.max_age_in_seconds
         }
       }
+    }
+  }
+
+  dynamic "static_website" {
+    for_each = local.static_website_enabled
+    content {
+      index_document     = var.index_path
+      error_404_document = var.custom_404_path
     }
   }
 }
