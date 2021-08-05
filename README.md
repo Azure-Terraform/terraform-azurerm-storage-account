@@ -24,9 +24,12 @@ No requirements.
 | allow\_blob\_public\_access | Allow or disallow public access to all blobs or containers in the storage account. | `bool` | `false` | no |
 | blob\_cors | blob service cors rules:  https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule | <pre>map(object({<br>    allowed_headers    = list(string)<br>    allowed_methods    = list(string)<br>    allowed_origins    = list(string)<br>    exposed_headers    = list(string)<br>    max_age_in_seconds = number<br>  }))</pre> | `null` | no |
 | blob\_delete\_retention\_days | Retention days for deleted blob. Valid value is between 1 and 365. | `number` | `7` | no |
+| custom\_404\_path | path from your repo root to your custom 404 page | `string` | `null` | no |
 | enable\_hns | Enable Hierarchical Namespace (can be used with Azure Data Lake Storage Gen 2). | `bool` | `false` | no |
 | enable\_https\_traffic\_only | Forces HTTPS if enabled. | `bool` | `true` | no |
 | enable\_large\_file\_share | Enable Large File Share. | `bool` | `false` | no |
+| enable\_static\_website | Controls if static website to be enabled on the storage account. Possible values are `true` or `false` | `bool` | `false` | no |
+| index\_path | path from your repo root to index.html | `string` | `null` | no |
 | location | Specifies the supported Azure location to MySQL server resource | `string` | n/a | yes |
 | min\_tls\_version | The minimum supported TLS version for the storage account. | `string` | `"TLS1_2"` | no |
 | name | Storage account name. | `string` | `null` | no |
