@@ -125,14 +125,18 @@ variable "blob_cors" {
 variable "enable_static_website" {
   description = "Controls if static website to be enabled on the storage account. Possible values are `true` or `false`"
   default     = false
+  type        = bool
 }
 
 variable "index_path" {
   description = "path from your repo root to index.html"
-  default     = "index.html"
+  default     = null
+  type        = string
 }
 
 variable "custom_404_path" {
   description = "path from your repo root to your custom 404 page"
-  default     = "404.html"
+  default     = null
+  type        = string
+
 }

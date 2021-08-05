@@ -91,8 +91,9 @@ module "storage_account" {
   names               = module.metadata.names
   tags                = module.metadata.tags
 
-  account_kind     = "StorageV2"
+  account_kind     = "FileStorage"
   replication_type = "LRS"
+  enable_large_file_share  = true
 
   access_list = {
     "my_ip" = chomp(data.http.my_ip.body)
