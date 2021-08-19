@@ -1,5 +1,3 @@
-
-
 resource "random_string" "random" {
   length  = 24
   special = false
@@ -68,15 +66,9 @@ resource "azurerm_storage_account_network_rules" "netrule" {
 }
 
 ## azure reference https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal
-## Policy ADR: https://reedelsevier.sharepoint.com/sites/OG-CoP-Cloud/SitePages/Azure-Policy---Storage-Account.aspx
 resource "azurerm_storage_encryption_scope" "runner" {
-  count = var.enable_infrastructure_encryption ? 1 : 0
-
   name                               = azurerm_storage_account.sa.name
   storage_account_id                 = azurerm_storage_account.sa.id
   source                             = "Microsoft.Storage"
-  infrastructure_encryption_required = true
+  infrastructure_encryption_required = var.enable_infrastructure_encryption
 }
-
-
-

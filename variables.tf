@@ -30,7 +30,7 @@ variable "tags" {
 variable "account_kind" {
   description = "Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2"
   type        = string
-  default = "StorageV2"
+  default     = "StorageV2"
 }
 
 variable "account_tier" {
