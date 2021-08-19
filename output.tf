@@ -117,3 +117,7 @@ output "tenant_id" {
   value       = azurerm_storage_account.sa.identity.0.tenant_id
   description = "The Tenant ID for the Service Principal associated with the Identity of this Storage Account."
 }
+
+output "encryption_scope_id" {
+  value = join("", azurerm_storage_encryption_scope.runner.*.id)
+}
