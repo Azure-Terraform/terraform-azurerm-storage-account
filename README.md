@@ -4,14 +4,18 @@ This module will create a storage account.
 <!--- BEGIN_TF_DOCS --->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| terraform | >=1.0 |
+| azurerm | ~> 2.72 |
+| random | ~> 3.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azurerm | n/a |
-| random | n/a |
+| azurerm | ~> 2.72 |
+| random | ~> 3.1 |
 
 ## Inputs
 
@@ -19,7 +23,7 @@ No requirements.
 |------|-------------|------|---------|:--------:|
 | access\_list | Map of CIDRs Storage Account access. | `map(string)` | `{}` | no |
 | access\_tier | Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts | `string` | `"Hot"` | no |
-| account\_kind | Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2 | `string` | n/a | yes |
+| account\_kind | Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2 | `string` | `"StorageV2"` | no |
 | account\_tier | Defines the Tier to use for this storage account (Standard or Premium). | `string` | `null` | no |
 | allow\_blob\_public\_access | Allow or disallow public access to all blobs or containers in the storage account. | `bool` | `false` | no |
 | blob\_cors | blob service cors rules:  https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule | <pre>map(object({<br>    allowed_headers    = list(string)<br>    allowed_methods    = list(string)<br>    allowed_origins    = list(string)<br>    exposed_headers    = list(string)<br>    max_age_in_seconds = number<br>  }))</pre> | `null` | no |
@@ -27,6 +31,7 @@ No requirements.
 | custom\_404\_path | path from your repo root to your custom 404 page | `string` | `null` | no |
 | enable\_hns | Enable Hierarchical Namespace (can be used with Azure Data Lake Storage Gen 2). | `bool` | `false` | no |
 | enable\_https\_traffic\_only | Forces HTTPS if enabled. | `bool` | `true` | no |
+| enable\_infrastructure\_encryption | Controls if infrastructure encryption is enabled. more info https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal | `bool` | `true` | no |
 | enable\_large\_file\_share | Enable Large File Share. | `bool` | `false` | no |
 | enable\_static\_website | Controls if static website to be enabled on the storage account. Possible values are `true` or `false` | `bool` | `false` | no |
 | index\_path | path from your repo root to index.html | `string` | `null` | no |
@@ -44,6 +49,7 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
+| encryption\_scope\_id | n/a |
 | id | The ID of the Storage Account. |
 | name | The name of the Storage Account. |
 | primary\_access\_key | The primary access key for the storage account. |
