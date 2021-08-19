@@ -3,3 +3,5 @@
 **/terraform.tfstate*
 **/.terraform
 **/crash.log
+**/.idea
+

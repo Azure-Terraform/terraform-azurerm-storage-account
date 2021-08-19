@@ -30,6 +30,7 @@ variable "tags" {
 variable "account_kind" {
   description = "Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2"
   type        = string
+  default = "StorageV2"
 }
 
 variable "account_tier" {
@@ -138,5 +139,10 @@ variable "custom_404_path" {
   description = "path from your repo root to your custom 404 page"
   default     = null
   type        = string
+}
 
+variable "enable_infrastructure_encryption" {
+  description = "Controls if infrastructure encryption is enabled. more info https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal"
+  type        = bool
+  default     = true
 }
