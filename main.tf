@@ -66,7 +66,7 @@ resource "azurerm_storage_account_network_rules" "netrule" {
 }
 
 ## azure reference https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal
-resource "azurerm_storage_encryption_scope" "runner" {
+resource "azurerm_storage_encryption_scope" "scope" {
   name                               = azurerm_storage_account.sa.name
   storage_account_id                 = azurerm_storage_account.sa.id
   source                             = "Microsoft.Storage"

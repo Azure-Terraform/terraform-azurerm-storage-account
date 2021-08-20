@@ -119,5 +119,5 @@ output "tenant_id" {
 }
 
 output "encryption_scope_id" {
-  value = join("", azurerm_storage_encryption_scope.runner.*.id)
+  value = azurerm_storage_encryption_scope.scope.id
 }
