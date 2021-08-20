@@ -1,17 +1,3 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=2.53.0"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "=2.3.0"
-    }
-  }
-  required_version = ">=0.14.8"
-}
-
 provider "azurerm" {
   features {}
 }
@@ -91,7 +77,6 @@ module "storage_account" {
   names               = module.metadata.names
   tags                = module.metadata.tags
 
-  account_kind     = "FileStorage"
   replication_type = "LRS"
   enable_large_file_share  = true
 
