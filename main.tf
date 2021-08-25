@@ -58,16 +58,10 @@ resource "azurerm_storage_account" "sa" {
 
   network_rules {
     default_action = var.default_network_rule
+    ip_rules                   = (contains(values(var.access_list), "0.0.0.0/0") ? [] : values(var.access_list))
+    virtual_network_subnet_ids = values(var.service_endpoints)
+    bypass=                      var.traffic_bypass
   }
-}
-
-resource "azurerm_storage_account_network_rules" "netrule" {
-  resource_group_name        = var.resource_group_name
-  storage_account_name       = azurerm_storage_account.sa.name
-  default_action             = (contains(values(var.access_list), "0.0.0.0/0") ? "Allow" : "Deny")
-  ip_rules                   = (contains(values(var.access_list), "0.0.0.0/0") ? [] : values(var.access_list))
-  virtual_network_subnet_ids = values(var.service_endpoints)
-  bypass                     = var.traffic_bypass
 }
 
 ## azure reference https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal
