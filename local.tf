@@ -12,4 +12,7 @@ locals {
 
   validate_nfsv3_network_rules = ((var.nfsv3_enabled && lower(var.default_network_rule) == "deny") ?
   true : file("ERROR: Default network rule must be Deny when using NFS V3"))
+
+  validate_network_rules = ((lower(var.default_network_rule) == "deny" && var.access_list == {} && var.service_endpoints == {})  ?
+  file("ERROR: Storage account does not allow any ingress traffic. Storage account will not be managable after creation") : true)
 }
