@@ -28,7 +28,7 @@ This module will create a storage account.
 | blob\_cors | blob service cors rules:  https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule | <pre>map(object({<br>    allowed_headers    = list(string)<br>    allowed_methods    = list(string)<br>    allowed_origins    = list(string)<br>    exposed_headers    = list(string)<br>    max_age_in_seconds = number<br>  }))</pre> | `null` | no |
 | blob\_delete\_retention\_days | Retention days for deleted blob. Valid value is between 1 and 365. | `number` | `7` | no |
 | custom\_404\_path | path from your repo root to your custom 404 page | `string` | `null` | no |
-| default\_network\_rule | n/a | `string` | `"Deny"` | no |
+| default\_network\_rule | Specifies the default action of allow or deny when no other network rules match | `string` | `"Deny"` | no |
 | enable\_hns | Enable Hierarchical Namespace (can be used with Azure Data Lake Storage Gen 2). | `bool` | `false` | no |
 | enable\_https\_traffic\_only | Forces HTTPS if enabled. | `bool` | `true` | no |
 | enable\_infrastructure\_encryption | Controls if infrastructure encryption is enabled. more info https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal | `bool` | `true` | no |
@@ -44,7 +44,7 @@ This module will create a storage account.
 | resource\_group\_name | name of the resource group to create the resource | `string` | n/a | yes |
 | service\_endpoints | Creates a virtual network rule in the subnet\_id (values are virtual network subnet ids). | `map(string)` | `{}` | no |
 | tags | tags to be applied to resources | `map(string)` | n/a | yes |
-| traffic\_bypass | Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None. | `list(string)` | <pre>[<br>  "None"<br>]</pre> | no |
+| traffic\_bypass | Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None. | `list(string)` | <pre>[<br>  "AzureServices"<br>]</pre> | no |
 
 ## Outputs
 
