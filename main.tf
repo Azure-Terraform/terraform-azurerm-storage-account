@@ -55,6 +55,10 @@ resource "azurerm_storage_account" "sa" {
       error_404_document = var.custom_404_path
     }
   }
+
+  network_rules {
+    default_action = var.default_network_rule
+  }
 }
 
 resource "azurerm_storage_account_network_rules" "netrule" {
