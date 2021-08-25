@@ -20,6 +20,7 @@ resource "azurerm_storage_account" "sa" {
   allow_blob_public_access  = var.allow_blob_public_access
   enable_https_traffic_only = var.enable_https_traffic_only
   min_tls_version           = var.min_tls_version
+  nfsv3_enabled             = var.nfsv3_enabled
 
   identity {
     type = "SystemAssigned"
