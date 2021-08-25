@@ -39,6 +39,7 @@ This module will create a storage account.
 | min\_tls\_version | The minimum supported TLS version for the storage account. | `string` | `"TLS1_2"` | no |
 | name | Storage account name. | `string` | `null` | no |
 | names | names to be applied to resources | `map(string)` | n/a | yes |
+| nfsv3\_enabled | Is NFSv3 protocol enabled? Changing this forces a new resource to be created | `bool` | `false` | no |
 | replication\_type | Storage account replication type - i.e. LRS, GRS, RAGRS, ZRS, GZRS, RAGZRS. | `string` | n/a | yes |
 | resource\_group\_name | name of the resource group to create the resource | `string` | n/a | yes |
 | service\_endpoints | Creates a virtual network rule in the subnet\_id (values are virtual network subnet ids). | `map(string)` | `{}` | no |
