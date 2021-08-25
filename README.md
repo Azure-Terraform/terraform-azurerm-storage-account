@@ -44,7 +44,7 @@ This module will create a storage account.
 | resource\_group\_name | name of the resource group to create the resource | `string` | n/a | yes |
 | service\_endpoints | Creates a virtual network rule in the subnet\_id (values are virtual network subnet ids). | `map(string)` | `{}` | no |
 | tags | tags to be applied to resources | `map(string)` | n/a | yes |
-| traffic\_bypass | Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None. | `list(string)` | <pre>[<br>  "AzureServices"<br>]</pre> | no |
+| traffic\_bypass | Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None. | `list(string)` | <pre>[<br>  "None"<br>]</pre> | no |
 
 ## Outputs
 
