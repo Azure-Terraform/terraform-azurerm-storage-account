@@ -146,3 +146,9 @@ variable "enable_infrastructure_encryption" {
   type        = bool
   default     = true
 }
+
+variable "nfsv3_enabled" {
+  description = "Is NFSv3 protocol enabled? Changing this forces a new resource to be created"
+  type        = bool
+  default     = false
+}
