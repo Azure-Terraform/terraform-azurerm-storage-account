@@ -159,7 +159,7 @@ variable "default_network_rule" {
   default     = "Deny"
 
   validation {
-    condition     = (contains(["Deny", "Allow"], lower(var.default_network_rule)))
+    condition     = (contains(["deny", "allow"], lower(var.default_network_rule)))
     error_message = "The default_network_rule must be either \"Deny\" or \"Allow\"."
   }
 }
