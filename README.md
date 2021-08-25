@@ -6,16 +6,15 @@ This module will create a storage account.
 
 | Name | Version |
 |------|---------|
-| terraform | >=1.0 |
-| azurerm | ~> 2.72 |
-| random | ~> 3.1 |
+| azurerm | >= 2.72 |
+| random | >= 3.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azurerm | ~> 2.72 |
-| random | ~> 3.1 |
+| azurerm | >= 2.72 |
+| random | >= 3.1 |
 
 ## Inputs
 
