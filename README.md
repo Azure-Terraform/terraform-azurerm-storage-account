@@ -54,6 +54,7 @@ This module will create a storage account.
 | id | The ID of the Storage Account. |
 | name | The name of the Storage Account. |
 | primary\_access\_key | The primary access key for the storage account. |
+| primary\_blob\_connection\_string | The connection string associated with the primary blob location. |
 | primary\_blob\_endpoint | The endpoint URL for blob storage in the primary location. |
 | primary\_blob\_host | The endpoint host for blob storage in the primary location. |
 | primary\_connection\_string | The connection string associated with the primary location. |
@@ -65,6 +66,7 @@ This module will create a storage account.
 | principal\_id | The Principal ID for the Service Principal associated with the Identity of this Storage Account. |
 | sa | The Storage Account object. |
 | secondary\_access\_key | The secondary access key for the storage account. |
+| secondary\_blob\_connection\_string | The connection string associated with the secondary blob location. |
 | secondary\_blob\_endpoint | The endpoint URL for blob storage in the secondary location. |
 | secondary\_blob\_host | The endpoint host for blob storage in the secondary location. |
 | secondary\_connection\_string | The connection string associated with the secondary location. |
