@@ -108,6 +108,18 @@ output "secondary_connection_string" {
   description = "The connection string associated with the secondary location."
 }
 
+output "primary_blob_connection_string" {
+  value       = azurerm_storage_account.sa.primary_blob_connection_string
+  sensitive   = true
+  description = "The connection string associated with the primary blob location."
+}
+
+output "secondary_blob_connection_string" {
+  value       = azurerm_storage_account.sa.secondary_blob_connection_string
+  sensitive   = true
+  description = "The connection string associated with the secondary blob location."
+}
+
 output "principal_id" {
   value       = azurerm_storage_account.sa.identity.0.principal_id
   description = "The Principal ID for the Service Principal associated with the Identity of this Storage Account."
