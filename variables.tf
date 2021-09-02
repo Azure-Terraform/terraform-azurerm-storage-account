@@ -163,3 +163,9 @@ variable "default_network_rule" {
     error_message = "The default_network_rule must be either \"Deny\" or \"Allow\"."
   }
 }
+
+variable "shared_access_key_enabled" {
+  description = "Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key"
+  type        = bool
+  default     = false
+}
