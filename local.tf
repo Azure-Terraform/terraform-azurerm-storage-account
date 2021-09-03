@@ -4,8 +4,8 @@ locals {
   account_tier           = (var.account_tier == null ? (var.account_kind == "BlockBlobStorage" || var.account_kind == "FileStorage" ? "Premium" : "Standard") : var.account_tier)
   static_website_enabled = (local.validate_static_website) ? [{}] : []
 
-  validate_static_website = ((var.enable_static_website && var.account_kind == "BlockBlobStorage" || var.account_kind == "StorageV2") ?
-  true : file("ERROR: Account kind must be BlockBlobStorage or StorageV2 when enabling static website"))
+  validate_static_website = ( var.enable_static_website ? ((var.account_kind == "BlockBlobStorage" || var.account_kind == "StorageV2") ?
+  true : file("ERROR: Account kind must be BlockBlobStorage or StorageV2 when enabling static website")) : false )
 
   validate_nfsv3 = (!var.nfsv3_enabled || (var.nfsv3_enabled && var.enable_hns) ?
   true : file("ERROR: NFS V3 can only be enabled when Hierarchical Namespaces are enabled"))
