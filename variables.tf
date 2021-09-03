@@ -30,6 +30,7 @@ variable "tags" {
 variable "account_kind" {
   description = "Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2"
   type        = string
+  default     = "StorageV2"
 }
 
 variable "account_tier" {
@@ -120,4 +121,45 @@ variable "blob_cors" {
     max_age_in_seconds = number
   }))
   default = null
+}
+
+variable "enable_static_website" {
+  description = "Controls if static website to be enabled on the storage account. Possible values are `true` or `false`"
+  default     = false
+  type        = bool
+}
+
+variable "index_path" {
+  description = "path from your repo root to index.html"
+  default     = null
+  type        = string
+}
+
+variable "custom_404_path" {
+  description = "path from your repo root to your custom 404 page"
+  default     = null
+  type        = string
+}
+
+variable "enable_infrastructure_encryption" {
+  description = "Controls if infrastructure encryption is enabled. more info https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal"
+  type        = bool
+  default     = true
+}
+
+variable "nfsv3_enabled" {
+  description = "Is NFSv3 protocol enabled? Changing this forces a new resource to be created"
+  type        = bool
+  default     = false
+}
+
+variable "default_network_rule" {
+  description = "Specifies the default action of allow or deny when no other network rules match"
+  type        = string
+  default     = "Deny"
+
+  validation {
+    condition     = (contains(["deny", "allow"], lower(var.default_network_rule)))
+    error_message = "The default_network_rule must be either \"Deny\" or \"Allow\"."
+  }
 }

@@ -1,17 +1,3 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=2.53.0"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "=2.3.0"
-    }
-  }
-  required_version = ">=0.14.8"
-}
-
 provider "azurerm" {
   features {}
 }
@@ -91,8 +77,8 @@ module "storage_account" {
   names               = module.metadata.names
   tags                = module.metadata.tags
 
-  account_kind     = "StorageV2"
   replication_type = "LRS"
+  enable_large_file_share  = true
 
   access_list = {
     "my_ip" = chomp(data.http.my_ip.body)
@@ -101,6 +87,8 @@ module "storage_account" {
   service_endpoints = {
     "iaas-outbound" = module.virtual_network.subnet["iaas-outbound"].id
   }
+
+  enable_static_website = true
 
   blob_cors = {
     test = {
