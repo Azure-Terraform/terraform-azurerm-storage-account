@@ -58,7 +58,8 @@ resource "azurerm_storage_account" "sa" {
 
   network_rules {
     default_action             = var.default_network_rule
-    ip_rules                   = values(var.access_list)
+    #ip_rules                   = values(var.access_list)
+    ip_rules                   = (contains(values(var.access_list), "0.0.0.0/0") ? [] : values(var.access_list))
     virtual_network_subnet_ids = values(var.service_endpoints)
     bypass                     = var.traffic_bypass
   }
