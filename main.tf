@@ -27,7 +27,7 @@ resource "azurerm_storage_account" "sa" {
   }
 
   dynamic "blob_properties" {
-    for_each = (var.account_kind == "BlockBlobStorage" ? [1] : [])
+    for_each = ((var.account_kind == "BlockBlobStorage" || var.account_kind == "StorageV2") ? [1] : [])
     content {
       dynamic "delete_retention_policy" {
         for_each = (var.blob_delete_retention_days == null ? [] : [1])
