@@ -21,6 +21,7 @@ resource "azurerm_storage_account" "sa" {
   enable_https_traffic_only = var.enable_https_traffic_only
   min_tls_version           = var.min_tls_version
   nfsv3_enabled             = var.nfsv3_enabled
+  shared_access_key_enabled = var.shared_access_key_enabled
 
   identity {
     type = "SystemAssigned"
