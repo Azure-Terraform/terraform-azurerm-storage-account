@@ -152,3 +152,20 @@ variable "nfsv3_enabled" {
   type        = bool
   default     = false
 }
+
+variable "default_network_rule" {
+  description = "Specifies the default action of allow or deny when no other network rules match"
+  type        = string
+  default     = "Deny"
+
+  validation {
+    condition     = (contains(["deny", "allow"], lower(var.default_network_rule)))
+    error_message = "The default_network_rule must be either \"Deny\" or \"Allow\"."
+  }
+}
+
+variable "shared_access_key_enabled" {
+  description = "Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key"
+  type        = bool
+  default     = false
+}
