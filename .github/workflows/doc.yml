@@ -10,8 +10,8 @@ jobs:
 
     - name: Storage Account Module Docs
       uses: terraform-docs/gh-actions@v0.10.0
-        with:
-          working-dir: .
-          output-file: README.md
-          output-method: inject
-          git-push: "true"
+      with:
+        working-dir: .
+        output-file: README.md
+        output-method: inject
+        git-push: "true"
