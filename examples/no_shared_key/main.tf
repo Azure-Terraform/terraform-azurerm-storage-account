@@ -1,7 +1,7 @@
 provider "azurerm" {
   
   # by default teraform uses the shared access key to access the storage account.
-  # to use azure ad auth by default, set this property to true
+  # to have terraform, use azure ad instead, set this property to true
   storage_use_azuread = true
   
   features {}
