@@ -1,6 +1,7 @@
 provider "azurerm" {
   
-   # 
+  # by default teraform uses the shared access key to access the storage account.
+  # to use azure ad auth by default, set this property to true
   storage_use_azuread = true
   
   features {}
@@ -8,8 +9,6 @@ provider "azurerm" {
 
 module "storage_account" {
   source = "../../"
-
-  count = 1
 
   resource_group_name = module.resource_group.name
   location            = module.resource_group.location
