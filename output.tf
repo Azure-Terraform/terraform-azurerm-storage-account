@@ -130,6 +130,7 @@ output "tenant_id" {
   description = "The Tenant ID for the Service Principal associated with the Identity of this Storage Account."
 }
 
-output "encryption_scope_id" {
-  value = azurerm_storage_encryption_scope.scope.id
-}
+#output "encryption_scopes_id" {
+#  description = "encryption scope info."
+#  value       = azurerm_storage_encryption_scope.scope.id
+#}
