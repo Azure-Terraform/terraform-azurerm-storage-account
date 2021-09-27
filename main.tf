@@ -67,9 +67,9 @@ resource "azurerm_storage_account" "sa" {
 
 ## azure reference https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal
 resource "azurerm_storage_encryption_scope" "scope" {
-  for_each = local.encryption_scopes
+  for_each = var.encryption_scopes
 
-  name                               = each.value.name
+  name                               = each.key
   storage_account_id                 = azurerm_storage_account.sa.id
   source                             = "Microsoft.Storage"
   infrastructure_encryption_required = each.value.enable_infrastructure_encryption

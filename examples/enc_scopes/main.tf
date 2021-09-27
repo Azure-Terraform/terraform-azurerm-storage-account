@@ -79,4 +79,17 @@ module "storage_account" {
   tags                = module.metadata.tags
 
   replication_type = "LRS"
+
+  encryption_scopes = {
+    customer1 = {
+      enable_infrastructure_encryption = false
+    }
+    customer2 = {
+      enable_infrastructure_encryption = true
+    }
+  }
+}
+
+output "encryption_scope_ids" {
+  value = module.storage_account.encryption_scope_ids
 }
