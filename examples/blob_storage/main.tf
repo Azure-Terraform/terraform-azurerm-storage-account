@@ -92,10 +92,10 @@ module "storage_account" {
 
   blob_cors = {
     test = {
-      allowed_headers    = []
+      allowed_headers    = ["*"]
       allowed_methods    = ["GET", "DELETE"]
       allowed_origins    = ["*"]
-      exposed_headers    = []
+      exposed_headers    = ["*"]
       max_age_in_seconds = 5
     }
   }
