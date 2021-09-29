@@ -1,9 +1,10 @@
 provider "azurerm" {
   features {}
+  storage_use_azuread = true
 }
 
 data "http" "my_ip" {
-  url = "http://ipv4.icanhazip.com"
+  url = "https://ifconfig.me"
 }
 
 data "azurerm_subscription" "current" {
@@ -81,7 +82,7 @@ module "storage_account" {
   enable_large_file_share = true
 
   access_list = {
-    "my_ip" = chomp(data.http.my_ip.body)
+    "my_ip" = data.http.my_ip.body
   }
 
   service_endpoints = {
@@ -92,10 +93,10 @@ module "storage_account" {
 
   blob_cors = {
     test = {
-      allowed_headers    = []
+      allowed_headers    = ["*"]
       allowed_methods    = ["GET", "DELETE"]
       allowed_origins    = ["*"]
-      exposed_headers    = []
+      exposed_headers    = ["*"]
       max_age_in_seconds = 5
     }
   }

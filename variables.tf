@@ -141,10 +141,12 @@ variable "custom_404_path" {
   type        = string
 }
 
-variable "enable_infrastructure_encryption" {
-  description = "Controls if infrastructure encryption is enabled. more info https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal"
-  type        = bool
-  default     = true
+variable "encryption_scopes" {
+  description = "Encryption scopes, keys are scope names. more info https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal"
+  type = map(object({
+    enable_infrastructure_encryption = bool
+  }))
+  default = {}
 }
 
 variable "nfsv3_enabled" {

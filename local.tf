@@ -4,8 +4,8 @@ locals {
   account_tier           = (var.account_tier == null ? (var.account_kind == "BlockBlobStorage" || var.account_kind == "FileStorage" ? "Premium" : "Standard") : var.account_tier)
   static_website_enabled = (local.validate_static_website) ? [{}] : []
 
-  validate_static_website = ( var.enable_static_website ? ((var.account_kind == "BlockBlobStorage" || var.account_kind == "StorageV2") ?
-  true : file("ERROR: Account kind must be BlockBlobStorage or StorageV2 when enabling static website")) : false )
+  validate_static_website = (var.enable_static_website ? ((var.account_kind == "BlockBlobStorage" || var.account_kind == "StorageV2") ?
+  true : file("ERROR: Account kind must be BlockBlobStorage or StorageV2 when enabling static website")) : false)
 
   validate_nfsv3 = (!var.nfsv3_enabled || (var.nfsv3_enabled && var.enable_hns) ?
   true : file("ERROR: NFS V3 can only be enabled when Hierarchical Namespaces are enabled"))
@@ -13,6 +13,6 @@ locals {
   validate_nfsv3_network_rules = (!var.nfsv3_enabled || (var.nfsv3_enabled && lower(var.default_network_rule) == "deny") ?
   true : file("ERROR: Default network rule must be Deny when using NFS V3"))
 
-  validate_network_rules = ((lower(var.default_network_rule) == "deny" && var.access_list == {} && var.service_endpoints == {})  ?
+  validate_network_rules = ((lower(var.default_network_rule) == "deny" && var.access_list == {} && var.service_endpoints == {}) ?
   file("ERROR: Storage account does not allow any ingress traffic. Storage account will not be managable after creation") : true)
 }

@@ -78,17 +78,18 @@ module "storage_account" {
   names               = module.metadata.names
   tags                = module.metadata.tags
 
-  account_kind             = "FileStorage"
-  replication_type         = "LRS"
-  account_tier             = "Premium"
-  access_tier              = "Hot"
-  enable_large_file_share  = true
+  replication_type = "LRS"
 
-  access_list = {
-    "my_ip" = data.http.my_ip.body
+  encryption_scopes = {
+    customer1 = {
+      enable_infrastructure_encryption = false
+    }
+    customer2 = {
+      enable_infrastructure_encryption = true
+    }
   }
+}
 
-  service_endpoints = {
-    "iaas-outbound" = module.virtual_network.subnet["iaas-outbound"].id
-  }
+output "encryption_scope_ids" {
+  value = module.storage_account.encryption_scope_ids
 }
