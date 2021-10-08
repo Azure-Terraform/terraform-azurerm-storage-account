@@ -171,3 +171,10 @@ variable "shared_access_key_enabled" {
   type        = bool
   default     = false
 }
+
+# Lifecycles
+variable "prevent_destroy" {
+  description = "To prevent destroy operations for the storage account resource"
+  type        = bool
+  default     = false
+}
