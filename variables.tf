@@ -1,8 +1,5 @@
-##
-# Required parameters
-##
 variable "name" {
-  description = "Storage account name."
+  description = "Storage account name"
   type        = string
   default     = null
 }
@@ -15,11 +12,6 @@ variable "location" {
 variable "resource_group_name" {
   description = "name of the resource group to create the resource"
   type        = string
-}
-
-variable "names" {
-  description = "names to be applied to resources"
-  type        = map(string)
 }
 
 variable "tags" {
@@ -125,20 +117,20 @@ variable "blob_cors" {
 
 variable "enable_static_website" {
   description = "Controls if static website to be enabled on the storage account. Possible values are `true` or `false`"
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "index_path" {
   description = "path from your repo root to index.html"
-  default     = null
   type        = string
+  default     = null
 }
 
 variable "custom_404_path" {
   description = "path from your repo root to your custom 404 page"
-  default     = null
   type        = string
+  default     = null
 }
 
 variable "encryption_scopes" {
