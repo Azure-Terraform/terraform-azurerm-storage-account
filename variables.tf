@@ -98,7 +98,7 @@ variable "traffic_bypass" {
 }
 
 variable "blob_delete_retention_days" {
-  description = "Retention days for deleted blob. Valid value is between 1 and 365."
+  description = "Retention days for deleted blob. Valid value is between 1 and 365 (set to 0 to disable)."
   type        = number
   default     = 7
 }
