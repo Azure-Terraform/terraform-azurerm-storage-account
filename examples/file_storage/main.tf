@@ -75,14 +75,15 @@ module "storage_account" {
 
   resource_group_name = module.resource_group.name
   location            = module.resource_group.location
-  names               = module.metadata.names
-  tags                = module.metadata.tags
 
-  account_kind             = "FileStorage"
-  replication_type         = "LRS"
-  account_tier             = "Premium"
-  access_tier              = "Hot"
-  enable_large_file_share  = true
+  tags = module.metadata.tags
+
+  account_kind              = "FileStorage"
+  replication_type          = "LRS"
+  account_tier              = "Premium"
+  access_tier               = "Hot"
+  enable_large_file_share   = true
+  shared_access_key_enabled = false
 
   access_list = {
     "my_ip" = data.http.my_ip.body
@@ -90,5 +91,33 @@ module "storage_account" {
 
   service_endpoints = {
     "iaas-outbound" = module.virtual_network.subnet["iaas-outbound"].id
+  }
+}
+
+data "azurerm_client_config" "current" {}
+
+resource "azurerm_role_assignment" "arb" {
+  scope                = module.storage_account.id
+  role_definition_name = "Owner"
+  principal_id         = data.azurerm_client_config.current.object_id
+
+  depends_on = [module.storage_account]
+}
+
+resource "azurerm_storage_share" "example" {
+  count = 0
+
+  name                 = "sharename"
+  storage_account_name = module.storage_account.name
+  quota                = 50
+
+  acl {
+    id = "MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI"
+
+    access_policy {
+      permissions = "rwdl"
+      start       = "2019-07-02T09:38:21.0000000Z"
+      expiry      = "2019-07-02T10:38:21.0000000Z"
+    }
   }
 }

@@ -1,9 +1,9 @@
 provider "azurerm" {
-  
+
   # by default teraform uses the shared access key to access the storage account.
   # to have terraform, use azure ad instead, set this property to true
   storage_use_azuread = true
-  
+
   features {}
 }
 
@@ -12,7 +12,6 @@ module "storage_account" {
 
   resource_group_name = module.resource_group.name
   location            = module.resource_group.location
-  names               = module.metadata.names
   tags                = module.metadata.tags
 
   account_kind     = "StorageV2"

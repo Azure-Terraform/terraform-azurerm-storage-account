@@ -17,11 +17,15 @@ resource "azurerm_storage_account" "sa" {
   is_hns_enabled           = var.enable_hns
   large_file_share_enabled = var.enable_large_file_share
 
-  allow_blob_public_access  = var.allow_blob_public_access
+  # will be renamed in provider 3.0 https://github.com/hashicorp/terraform-provider-azurerm/issues/14193
+  #allow_blob_public_access  = var.allow_blob_public_access
+  allow_nested_items_to_be_public = var.allow_blob_public_access
+
   enable_https_traffic_only = var.enable_https_traffic_only
   min_tls_version           = var.min_tls_version
   nfsv3_enabled             = var.nfsv3_enabled
   shared_access_key_enabled = var.shared_access_key_enabled
+
 
   identity {
     type = "SystemAssigned"

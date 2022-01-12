@@ -5,6 +5,7 @@ data "http" "my_ip" {
 data "azurerm_subscription" "current" {
 }
 
+
 resource "random_string" "random" {
   length  = 12
   upper   = false

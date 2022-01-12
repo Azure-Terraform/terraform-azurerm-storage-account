@@ -57,7 +57,6 @@ module "virtual_network" {
 
   resource_group_name = module.resource_group.name
   location            = module.resource_group.location
-  names               = module.metadata.names
   tags                = module.metadata.tags
 
   address_space = ["10.1.1.0/24"]
@@ -75,7 +74,6 @@ module "storage_account" {
 
   resource_group_name = module.resource_group.name
   location            = module.resource_group.location
-  names               = module.metadata.names
   tags                = module.metadata.tags
 
   replication_type = "LRS"
