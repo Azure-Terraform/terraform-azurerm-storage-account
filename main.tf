@@ -21,6 +21,7 @@ resource "azurerm_storage_account" "sa" {
   enable_https_traffic_only = var.enable_https_traffic_only
   min_tls_version           = var.min_tls_version
   nfsv3_enabled             = var.nfsv3_enabled
+  infrastructure_encryption_enabled = var.infrastructure_encryption_enabled
   shared_access_key_enabled = var.shared_access_key_enabled
 
   identity {
@@ -71,6 +72,6 @@ resource "azurerm_storage_encryption_scope" "scope" {
 
   name                               = each.key
   storage_account_id                 = azurerm_storage_account.sa.id
-  source                             = "Microsoft.Storage"
-  infrastructure_encryption_required = each.value.enable_infrastructure_encryption
+  source                             = coalesce(each.value.source, "Microsoft.Storage")
+  infrastructure_encryption_required = coalesce(each.value.enable_infrastructure_encryption, var.infrastructure_encryption_enabled)
 }

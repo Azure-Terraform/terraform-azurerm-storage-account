@@ -17,16 +17,16 @@ resource "random_string" "random" {
 }
 
 module "subscription" {
-  source          = "github.com/Azure-Terraform/terraform-azurerm-subscription-data.git?ref=v1.0.0"
+  source          = "git::https://github.com/Azure-Terraform/terraform-azurerm-subscription-data.git?ref=v1.0.0"
   subscription_id = data.azurerm_subscription.current.subscription_id
 }
 
 module "naming" {
-  source = "git@github.com:Azure-Terraform/example-naming-template.git?ref=v1.0.0"
+  source = "git::https://github.com/Azure-Terraform/example-naming-template.git?ref=v1.0.0"
 }
 
 module "metadata" {
-  source = "github.com/Azure-Terraform/terraform-azurerm-metadata.git?ref=v1.1.0"
+  source = "git::https://github.com/Azure-Terraform/terraform-azurerm-metadata.git?ref=v1.1.0"
 
   naming_rules = module.naming.yaml
 
@@ -43,7 +43,7 @@ module "metadata" {
 }
 
 module "resource_group" {
-  source = "github.com/Azure-Terraform/terraform-azurerm-resource-group.git?ref=v1.0.0"
+  source = "git::https://github.com/Azure-Terraform/terraform-azurerm-resource-group.git?ref=v1.0.0"
 
   location = module.metadata.location
   names    = module.metadata.names
@@ -51,7 +51,7 @@ module "resource_group" {
 }
 
 module "virtual_network" {
-  source = "github.com/Azure-Terraform/terraform-azurerm-virtual-network.git?ref=v2.6.0"
+  source = "git::https://github.com/Azure-Terraform/terraform-azurerm-virtual-network.git?ref=v2.6.0"
 
   naming_rules = module.naming.yaml
 
@@ -75,17 +75,20 @@ module "storage_account" {
 
   resource_group_name = module.resource_group.name
   location            = module.resource_group.location
-  names               = module.metadata.names
   tags                = module.metadata.tags
+  account_kind        = "StorageV2"
 
-  replication_type = "LRS"
+  replication_type                  = "LRS"
+  infrastructure_encryption_enabled = true
 
   encryption_scopes = {
     customer1 = {
       enable_infrastructure_encryption = false
+      scope = "Microsoft.KeyVault"
     }
     customer2 = {
-      enable_infrastructure_encryption = true
+      # enable_infrastructure_encryption inherits from base resource setting if not defined"
+      scope = "Microsoft.Storage"
     }
   }
 }
