@@ -163,3 +163,9 @@ variable "shared_access_key_enabled" {
   type        = bool
   default     = false
 }
+
+variable "blob_versioning_enabled" {
+  description = "Controls whether blob object versioning is enabled."
+  type        = bool
+  default     = false
+}
