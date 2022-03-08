@@ -30,16 +30,11 @@ resource "azurerm_storage_account" "sa" {
   dynamic "blob_properties" {
     for_each = ((var.account_kind == "BlockBlobStorage" || var.account_kind == "StorageV2") ? [1] : [])
     content {
+      versioning_enabled = var.blob_versioning_enabled
       dynamic "delete_retention_policy" {
         for_each = (var.blob_delete_retention_days == 0 ? [] : [1])
         content {
           days = var.blob_delete_retention_days
-        }
-      }
-      dynamic "versioning_enabled" {
-        for_each = (var.blob_versioning_enabled == false ? [] : [1])
-        content {
-          value = var.blob_versioning_enabled
         }
       }
       dynamic "cors_rule" {
