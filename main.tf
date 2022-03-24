@@ -31,6 +31,8 @@ resource "azurerm_storage_account" "sa" {
   dynamic "blob_properties" {
     for_each = ((var.account_kind == "BlockBlobStorage" || var.account_kind == "StorageV2") ? [1] : [])
     content {
+      versioning_enabled = var.blob_versioning_enabled
+
       dynamic "delete_retention_policy" {
         for_each = (var.blob_delete_retention_days == 0 ? [] : [1])
         content {
@@ -72,6 +74,12 @@ resource "azurerm_storage_encryption_scope" "scope" {
 
   name                               = each.key
   storage_account_id                 = azurerm_storage_account.sa.id
+<<<<<<< HEAD
   source                             = coalesce(each.value.source, "Microsoft.Storage")
   infrastructure_encryption_required = coalesce(each.value.enable_infrastructure_encryption, var.infrastructure_encryption_enabled)
 }
+=======
+  source                             = "Microsoft.Storage"
+  infrastructure_encryption_required = each.value.enable_infrastructure_encryption
+}
+>>>>>>> aac200b87497b42ef4687fbf4c9999dbb808c3a1
