@@ -74,12 +74,6 @@ resource "azurerm_storage_encryption_scope" "scope" {
 
   name                               = each.key
   storage_account_id                 = azurerm_storage_account.sa.id
-<<<<<<< HEAD
   source                             = coalesce(each.value.source, "Microsoft.Storage")
   infrastructure_encryption_required = coalesce(each.value.enable_infrastructure_encryption, var.infrastructure_encryption_enabled)
 }
-=======
-  source                             = "Microsoft.Storage"
-  infrastructure_encryption_required = each.value.enable_infrastructure_encryption
-}
->>>>>>> aac200b87497b42ef4687fbf4c9999dbb808c3a1
