@@ -17,16 +17,16 @@ resource "random_string" "random" {
 }
 
 module "subscription" {
-  source          = "git::https://github.com/Azure-Terraform/terraform-azurerm-subscription-data.git?ref=v1.0.0"
+  source          = "github.com/Azure-Terraform/terraform-azurerm-subscription-data.git?ref=v1.0.0"
   subscription_id = data.azurerm_subscription.current.subscription_id
 }
 
 module "naming" {
-  source = "git::https://github.com/Azure-Terraform/example-naming-template.git?ref=v1.0.0"
+  source = "github.com/Azure-Terraform/example-naming-template.git?ref=v1.0.0"
 }
 
 module "metadata" {
-  source = "git::https://github.com/Azure-Terraform/terraform-azurerm-metadata.git?ref=v1.1.0"
+  source = "github.com/Azure-Terraform/terraform-azurerm-metadata.git?ref=v1.1.0"
 
   naming_rules = module.naming.yaml
 
@@ -43,7 +43,7 @@ module "metadata" {
 }
 
 module "resource_group" {
-  source = "git::https://github.com/Azure-Terraform/terraform-azurerm-resource-group.git?ref=v1.0.0"
+  source = "github.com/Azure-Terraform/terraform-azurerm-resource-group.git?ref=v1.0.0"
 
   location = module.metadata.location
   names    = module.metadata.names
@@ -51,7 +51,7 @@ module "resource_group" {
 }
 
 module "virtual_network" {
-  source = "git::https://github.com/Azure-Terraform/terraform-azurerm-virtual-network.git?ref=v2.6.0"
+  source = "github.com/Azure-Terraform/terraform-azurerm-virtual-network.git?ref=v2.6.0"
 
   naming_rules = module.naming.yaml
 
@@ -84,7 +84,7 @@ module "storage_account" {
   encryption_scopes = {
     customer1 = {
       enable_infrastructure_encryption = false
-      scope = "Microsoft.KeyVault"
+      scope                            = "Microsoft.KeyVault"
     }
     customer2 = {
       # enable_infrastructure_encryption inherits from base resource setting if not defined"
