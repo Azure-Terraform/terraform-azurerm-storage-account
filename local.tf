@@ -15,4 +15,7 @@ locals {
 
   validate_network_rules = ((lower(var.default_network_rule) == "deny" && var.access_list == {} && var.service_endpoints == {}) ?
   file("ERROR: Storage account does not allow any ingress traffic. Storage account will not be managable after creation") : true)
+
+  validate_encryption_rules = ((var.infrastructure_encryption_enabled && var.account_kind != "StorageV2") ?
+  file("ERROR: Infrastructure encryption can only be enabled when account kind is StorageV2") : true)
 }

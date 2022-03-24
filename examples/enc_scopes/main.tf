@@ -22,7 +22,7 @@ module "subscription" {
 }
 
 module "naming" {
-  source = "git@github.com:Azure-Terraform/example-naming-template.git?ref=v1.0.0"
+  source = "github.com/Azure-Terraform/example-naming-template.git?ref=v1.0.0"
 }
 
 module "metadata" {
@@ -75,17 +75,20 @@ module "storage_account" {
 
   resource_group_name = module.resource_group.name
   location            = module.resource_group.location
-  names               = module.metadata.names
   tags                = module.metadata.tags
+  account_kind        = "StorageV2"
 
-  replication_type = "LRS"
+  replication_type                  = "LRS"
+  infrastructure_encryption_enabled = true
 
   encryption_scopes = {
     customer1 = {
       enable_infrastructure_encryption = false
+      scope                            = "Microsoft.KeyVault"
     }
     customer2 = {
-      enable_infrastructure_encryption = true
+      # enable_infrastructure_encryption inherits from base resource setting if not defined"
+      scope = "Microsoft.Storage"
     }
   }
 }

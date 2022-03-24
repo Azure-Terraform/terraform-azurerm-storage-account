@@ -71,7 +71,7 @@ variable "min_tls_version" {
   default     = "TLS1_2"
 }
 
-variable "allow_blob_public_access" {
+variable "allow_nested_items_to_be_public" {
   description = "Allow or disallow public access to all blobs or containers in the storage account."
   type        = bool
   default     = false
@@ -136,9 +136,17 @@ variable "custom_404_path" {
 variable "encryption_scopes" {
   description = "Encryption scopes, keys are scope names. more info https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal"
   type = map(object({
-    enable_infrastructure_encryption = bool
+    enable_infrastructure_encryption = optional(bool)
+    source                           = optional(string)
   }))
+
   default = {}
+}
+
+variable "infrastructure_encryption_enabled" {
+  description = "Is infrastructure encryption enabled? Changing this forces a new resource to be created."
+  type        = bool
+  default     = true
 }
 
 variable "nfsv3_enabled" {

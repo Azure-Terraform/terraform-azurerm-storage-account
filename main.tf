@@ -14,14 +14,14 @@ resource "azurerm_storage_account" "sa" {
   access_tier              = var.access_tier
   tags                     = var.tags
 
-  is_hns_enabled           = var.enable_hns
-  large_file_share_enabled = var.enable_large_file_share
-
-  allow_blob_public_access  = var.allow_blob_public_access
-  enable_https_traffic_only = var.enable_https_traffic_only
-  min_tls_version           = var.min_tls_version
-  nfsv3_enabled             = var.nfsv3_enabled
-  shared_access_key_enabled = var.shared_access_key_enabled
+  is_hns_enabled                    = var.enable_hns
+  large_file_share_enabled          = var.enable_large_file_share
+  allow_nested_items_to_be_public   = var.allow_nested_items_to_be_public
+  enable_https_traffic_only         = var.enable_https_traffic_only
+  min_tls_version                   = var.min_tls_version
+  nfsv3_enabled                     = var.nfsv3_enabled
+  infrastructure_encryption_enabled = var.infrastructure_encryption_enabled
+  shared_access_key_enabled         = var.shared_access_key_enabled
 
   identity {
     type = "SystemAssigned"
@@ -66,13 +66,12 @@ resource "azurerm_storage_account" "sa" {
     bypass                     = var.traffic_bypass
   }
 }
-
 ## azure reference https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal
 resource "azurerm_storage_encryption_scope" "scope" {
   for_each = var.encryption_scopes
 
   name                               = each.key
   storage_account_id                 = azurerm_storage_account.sa.id
-  source                             = "Microsoft.Storage"
-  infrastructure_encryption_required = each.value.enable_infrastructure_encryption
+  source                             = coalesce(each.value.source, "Microsoft.Storage")
+  infrastructure_encryption_required = coalesce(each.value.enable_infrastructure_encryption, var.infrastructure_encryption_enabled)
 }
