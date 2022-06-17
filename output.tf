@@ -86,9 +86,19 @@ output "secondary_dfs_endpoint" {
   description = "The endpoint URL for DFS storage in the secondary location."
 }
 
+output "primary_web_host" {
+  value       = azurerm_storage_account.sa.primary_web_host
+  description = "Hostname with port for web storage in the primary location."
+}
+
 output "primary_web_endpoint" {
   value       = azurerm_storage_account.sa.primary_web_endpoint
   description = "The endpoint URL for web storage in the primary location."
+}
+
+output "secondary_web_host" {
+  value       = azurerm_storage_account.sa.secondary_web_host
+  description = "Hostname with port for web storage in the secondary location."
 }
 
 output "secondary_web_endpoint" {
