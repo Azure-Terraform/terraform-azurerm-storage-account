@@ -78,6 +78,7 @@ No modules.
 | <a name="output_primary_queue_endpoint"></a> [primary\_queue\_endpoint](#output\_primary\_queue\_endpoint) | The endpoint URL for queue storage in the primary location. |
 | <a name="output_primary_table_endpoint"></a> [primary\_table\_endpoint](#output\_primary\_table\_endpoint) | The endpoint URL for table storage in the primary location. |
 | <a name="output_primary_web_endpoint"></a> [primary\_web\_endpoint](#output\_primary\_web\_endpoint) | The endpoint URL for web storage in the primary location. |
+| <a name="output_primary_web_host"></a> [primary\_web\_host](#output\_primary\_web\_host) | Hostname with port for web storage in the primary location. |
 | <a name="output_principal_id"></a> [principal\_id](#output\_principal\_id) | The Principal ID for the Service Principal associated with the Identity of this Storage Account. |
 | <a name="output_sa"></a> [sa](#output\_sa) | The Storage Account object. |
 | <a name="output_secondary_access_key"></a> [secondary\_access\_key](#output\_secondary\_access\_key) | The secondary access key for the storage account. |
@@ -90,6 +91,7 @@ No modules.
 | <a name="output_secondary_queue_endpoint"></a> [secondary\_queue\_endpoint](#output\_secondary\_queue\_endpoint) | The endpoint URL for queue storage in the secondary location. |
 | <a name="output_secondary_table_endpoint"></a> [secondary\_table\_endpoint](#output\_secondary\_table\_endpoint) | The endpoint URL for table storage in the secondary location. |
 | <a name="output_secondary_web_endpoint"></a> [secondary\_web\_endpoint](#output\_secondary\_web\_endpoint) | The endpoint URL for web storage in the secondary location. |
+| <a name="output_secondary_web_host"></a> [secondary\_web\_host](#output\_secondary\_web\_host) | Hostname with port for web storage in the secondary location. |
 | <a name="output_tenant_id"></a> [tenant\_id](#output\_tenant\_id) | The Tenant ID for the Service Principal associated with the Identity of this Storage Account. |
 
 <!--- END_TF_DOCS --->
