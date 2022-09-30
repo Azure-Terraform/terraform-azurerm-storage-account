@@ -38,6 +38,14 @@ resource "azurerm_storage_account" "sa" {
           days = var.blob_delete_retention_days
         }
       }
+      
+      dynamic "container_delete_retention_policy" {
+        for_each = (var.container_delete_retention_days == 0 ? [] : [1])
+        content {
+          days = var.container_delete_retention_days
+        }
+      }
+      
       dynamic "cors_rule" {
         for_each = (var.blob_cors == null ? {} : var.blob_cors)
         content {
