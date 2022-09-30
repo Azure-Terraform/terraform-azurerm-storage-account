@@ -177,3 +177,9 @@ variable "blob_versioning_enabled" {
   type        = bool
   default     = false
 }
+
+variable "container_delete_retention_days" {
+  description = "Retention days for deleted container. Valid value is between 1 and 365 (set to 0 to disable)."
+  type        = number
+  default     = 7
+}
