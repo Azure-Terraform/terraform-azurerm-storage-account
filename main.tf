@@ -22,6 +22,8 @@ resource "azurerm_storage_account" "sa" {
   nfsv3_enabled                     = var.nfsv3_enabled
   infrastructure_encryption_enabled = var.infrastructure_encryption_enabled
   shared_access_key_enabled         = var.shared_access_key_enabled
+  public_network_access_enabled     = var.public_network_access_enabled
+  sftp_enabled                      = var.sftp_enabled
 
   identity {
     type = "SystemAssigned"
