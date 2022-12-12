@@ -187,7 +187,7 @@ variable "container_delete_retention_days" {
 variable "public_network_access_enabled" {
   description = "public access to set to flase for SA"
   type = bool
-  default = true
+  default = false
 }
 
 variable "sftp_enabled" {
