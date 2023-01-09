@@ -1,11 +1,5 @@
-resource "random_string" "random" {
-  length  = 24
-  special = false
-  upper   = false
-}
-
 resource "azurerm_storage_account" "sa" {
-  name                     = (var.name == null ? random_string.random.result : var.name)
+  name                     = var.name
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_kind             = var.account_kind
@@ -22,6 +16,8 @@ resource "azurerm_storage_account" "sa" {
   nfsv3_enabled                     = var.nfsv3_enabled
   infrastructure_encryption_enabled = var.infrastructure_encryption_enabled
   shared_access_key_enabled         = var.shared_access_key_enabled
+  public_network_access_enabled     = var.public_network_access_enabled
+  default_to_oauth_authentication   = var.default_to_oauth_authentication
 
   identity {
     type = "SystemAssigned"
@@ -38,14 +34,14 @@ resource "azurerm_storage_account" "sa" {
           days = var.blob_delete_retention_days
         }
       }
-      
+
       dynamic "container_delete_retention_policy" {
         for_each = (var.container_delete_retention_days == 0 ? [] : [1])
         content {
           days = var.container_delete_retention_days
         }
       }
-      
+
       dynamic "cors_rule" {
         for_each = (var.blob_cors == null ? {} : var.blob_cors)
         content {
@@ -65,13 +61,6 @@ resource "azurerm_storage_account" "sa" {
       index_document     = var.index_path
       error_404_document = var.custom_404_path
     }
-  }
-
-  network_rules {
-    default_action             = var.default_network_rule
-    ip_rules                   = values(var.access_list)
-    virtual_network_subnet_ids = values(var.service_endpoints)
-    bypass                     = var.traffic_bypass
   }
 }
 ## azure reference https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal

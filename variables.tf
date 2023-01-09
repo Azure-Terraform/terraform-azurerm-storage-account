@@ -1,7 +1,6 @@
 variable "name" {
   description = "Storage account name"
   type        = string
-  default     = null
 }
 
 variable "location" {
@@ -73,6 +72,12 @@ variable "min_tls_version" {
 
 variable "allow_nested_items_to_be_public" {
   description = "Allow or disallow public access to all blobs or containers in the storage account."
+  type        = bool
+  default     = false
+}
+
+variable "default_to_oauth_authentication" {
+  description = "Default to Azure Active Directory authorization in the Azure portal when accessing the Storage Account."
   type        = bool
   default     = false
 }
