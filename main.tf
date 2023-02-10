@@ -15,6 +15,7 @@ resource "azurerm_storage_account" "sa" {
   tags                     = var.tags
 
   is_hns_enabled                    = var.enable_hns
+  sftp_enabled                      = var.enable_sftp
   large_file_share_enabled          = var.enable_large_file_share
   allow_nested_items_to_be_public   = var.allow_nested_items_to_be_public
   enable_https_traffic_only         = var.enable_https_traffic_only
