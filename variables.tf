@@ -59,6 +59,12 @@ variable "enable_hns" {
   default     = false
 }
 
+variable "enable_sftp" {
+  description = "Enable SFTP for storage account (enable_hns must be set to true for this to work)."
+  type        = bool
+  default     = false
+}
+
 variable "enable_https_traffic_only" {
   description = "Forces HTTPS if enabled."
   type        = bool
