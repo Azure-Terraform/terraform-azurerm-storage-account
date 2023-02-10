@@ -10,6 +10,9 @@ locals {
   validate_nfsv3 = (!var.nfsv3_enabled || (var.nfsv3_enabled && var.enable_hns) ?
   true : file("ERROR: NFS V3 can only be enabled when Hierarchical Namespaces are enabled"))
 
+  validate_sftp = (!var.enable_sftp || (var.enable_sftp && var.enable_hns) ?
+  true : file("ERROR: SFTP can only be enabled when Hierarchical Namespaces are enabled"))
+
   validate_nfsv3_network_rules = (!var.nfsv3_enabled || (var.nfsv3_enabled && lower(var.default_network_rule) == "deny") ?
   true : file("ERROR: Default network rule must be Deny when using NFS V3"))
 
