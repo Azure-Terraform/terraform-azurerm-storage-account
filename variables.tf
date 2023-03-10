@@ -71,6 +71,11 @@ variable "enable_https_traffic_only" {
   default     = true
 }
 
+variable "public_network_access_enabled" {
+  description = "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+  type        = bool
+}
+
 variable "min_tls_version" {
   description = "The minimum supported TLS version for the storage account."
   type        = string
@@ -100,7 +105,7 @@ variable "service_endpoints" {
 variable "traffic_bypass" {
   description = "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None."
   type        = list(string)
-  default     = ["None"]
+  default     = ["AzureServices"] // https://docs.bridgecrew.io/docs/enable-trusted-microsoft-services-for-storage-account-access
 }
 
 variable "blob_delete_retention_days" {
