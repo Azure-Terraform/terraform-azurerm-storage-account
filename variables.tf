@@ -178,6 +178,12 @@ variable "shared_access_key_enabled" {
   default     = false
 }
 
+variable "default_to_oauth_authentication" {
+  description = "Set default authentication to storage account content"
+  type        = bool
+  default     = false
+}
+
 variable "blob_versioning_enabled" {
   description = "Controls whether blob object versioning is enabled."
   type        = bool
