@@ -23,9 +23,9 @@ resource "azurerm_storage_account" "sa" {
   nfsv3_enabled             = var.nfsv3_enabled
   shared_access_key_enabled = var.shared_access_key_enabled
 
-  identity {
-    type = "SystemAssigned"
-  }
+  //identity {
+  //  type = "SystemAssigned"
+  //}
 
   dynamic "blob_properties" {
     for_each = ((var.account_kind == "BlockBlobStorage" || var.account_kind == "StorageV2") ? [1] : [])
