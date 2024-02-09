@@ -37,7 +37,6 @@ variable "access_tier" {
   default     = null
 }
 
-
 variable "replication_type" {
   description = "Storage account replication type - i.e. LRS, GRS, RAGRS, ZRS, GZRS, RAGZRS."
   type        = string
