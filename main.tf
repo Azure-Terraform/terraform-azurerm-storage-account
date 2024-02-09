@@ -11,7 +11,7 @@ resource "azurerm_storage_account" "sa" {
   account_kind             = var.account_kind
   account_tier             = local.account_tier
   account_replication_type = var.replication_type
-  access_tier              = var.account_kind != "BlockBlobStorage" ? var.access_tier : null
+  access_tier              = var.access_tier
   tags                     = var.tags
 
   is_hns_enabled                    = var.enable_hns
@@ -40,14 +40,14 @@ resource "azurerm_storage_account" "sa" {
           days = var.blob_delete_retention_days
         }
       }
-      
+
       dynamic "container_delete_retention_policy" {
         for_each = (var.container_delete_retention_days == 0 ? [] : [1])
         content {
           days = var.container_delete_retention_days
         }
       }
-      
+
       dynamic "cors_rule" {
         for_each = (var.blob_cors == null ? {} : var.blob_cors)
         content {

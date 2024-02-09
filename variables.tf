@@ -32,10 +32,11 @@ variable "account_tier" {
 }
 
 variable "access_tier" {
-  description = "Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts"
   type        = string
+  description = "Optional. Defines the access tier for the storage account. Valid options are Hot and Cool."
   default     = null
 }
+
 
 variable "replication_type" {
   description = "Storage account replication type - i.e. LRS, GRS, RAGRS, ZRS, GZRS, RAGZRS."
