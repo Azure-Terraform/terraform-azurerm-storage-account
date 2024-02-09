@@ -11,7 +11,7 @@ resource "azurerm_storage_account" "sa" {
   account_kind             = var.account_kind
   account_tier             = local.account_tier
   account_replication_type = var.replication_type
-  access_tier              = local.access_tier
+  access_tier              = var.account_kind == "BlockBlobStorage" ? null : var.access_tier
   tags                     = var.tags
 
   is_hns_enabled                    = var.enable_hns
