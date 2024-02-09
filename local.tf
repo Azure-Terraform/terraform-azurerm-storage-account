@@ -4,7 +4,7 @@ locals {
   account_tier = (var.account_tier == null ? (var.account_kind == "BlockBlobStorage" || var.account_kind == "FileStorage" ? "Premium" : "Standard") : var.account_tier)
   static_website_enabled = (local.validate_static_website) ? [{}] : [
   ]
-  // Sets access_tier to null if account_kind is 'BlobStorage', or to the value of var.access_tier otherwise
+  // Sets access_tier to null if account_kind is 'BlockBlobStorage', or to the value of var.access_tier otherwise
   access_tier = var.account_kind == "BlockBlobStorage" ? null : var.access_tier
   validate_static_website = (var.enable_static_website ? ((var.account_kind == "BlockBlobStorage" || var.account_kind == "StorageV2") ?
   true : file("ERROR: Account kind must be BlockBlobStorage or StorageV2 when enabling static website")) : false)
