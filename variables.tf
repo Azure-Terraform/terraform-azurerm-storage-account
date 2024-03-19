@@ -121,6 +121,57 @@ variable "blob_cors" {
   default = null
 }
 
+variable "shares" {
+  description = "Manages a File Share within Azure Storage."
+  type = map(object({
+    quota = optional(number)
+
+    acl = optional(object({
+      access_policy = object({
+        permissions = string
+        start       = string
+        expiry      = string
+      })
+    }))
+
+    dirs = optional(map(object({
+      metadata = optional(map(string))
+      files = optional(map(object({
+        path                = optional(string)
+        source              = optional(string)
+        content_type        = optional(string)
+        content_md5         = optional(string)
+        content_disposition = optional(string)
+        metadata            = optional(map(string))
+      })))
+    })))
+  }))
+  default = {}
+}
+
+variable "containers" {
+  description = "Manages a Container within an Azure Storage Account."
+  type = map(object({
+    container_access_type = optional(string)
+    metadata              = optional(map(string))
+    blobs = optional(map(object({
+      type           = optional(string)
+      source         = optional(string)
+      size           = optional(number)
+      access_tier    = optional(string)
+      content_type   = optional(string)
+      content_md5    = optional(string)
+      source         = optional(string)
+      source_content = optional(string)
+      source_uri     = optional(string)
+      parallelism    = optional(number)
+      metadata       = optional(map(string))
+    })))
+  }))
+  default = {}
+}
+
+
 variable "enable_static_website" {
   description = "Controls if static website to be enabled on the storage account. Possible values are `true` or `false`"
   type        = bool

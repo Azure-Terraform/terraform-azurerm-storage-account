@@ -99,4 +99,13 @@ module "storage_account" {
       max_age_in_seconds = 5
     }
   }
+  containers = {
+    foo = {
+      blobs = {
+        "file.json" = {
+          source_content = jsonencode({ "hello" = "world" })
+        }
+      }
+    }
+  }
 }
