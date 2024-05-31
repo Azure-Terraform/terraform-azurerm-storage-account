@@ -22,7 +22,7 @@ variable "tags" {
 variable "account_kind" {
   description = "Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2"
   type        = string
-  default     = "StorageV2"
+  default     = "null"
 }
 
 variable "account_tier" {
@@ -32,14 +32,9 @@ variable "account_tier" {
 }
 
 variable "access_tier" {
-  description = "Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts"
   type        = string
-  default     = "Hot"
-
-  validation {
-    condition     = (contains(["hot", "cool"], lower(var.access_tier)))
-    error_message = "The account_tier must be either \"Hot\" or \"Cool\"."
-  }
+  description = "Optional. Defines the access tier for the storage account. Valid options are Hot and Cool."
+  default     = null
 }
 
 variable "blob_last_access_time_enabled" {
