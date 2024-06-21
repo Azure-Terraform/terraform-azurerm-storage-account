@@ -201,3 +201,9 @@ variable "container_delete_retention_days" {
   type        = number
   default     = 7
 }
+
+variable "cross_tenant_replication_enabled" {
+  description = "Controls whether cross-tenant replication is allowed."
+  type        = bool
+  default     = true
+}
