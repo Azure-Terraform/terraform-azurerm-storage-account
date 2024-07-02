@@ -133,6 +133,12 @@ variable "enable_static_website" {
   default     = false
 }
 
+variable "cross_tenant_replication_enabled" {
+  description = "Enable cross tenant replication when needed and valid reason. Possible values are `true` or `false`"
+  type        = bool
+  default     = false
+}
+
 variable "index_path" {
   description = "path from your repo root to index.html"
   type        = string
