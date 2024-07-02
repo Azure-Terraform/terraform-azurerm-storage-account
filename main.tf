@@ -24,8 +24,8 @@ resource "azurerm_storage_account" "sa" {
   cross_tenant_replication_enabled  = var.cross_tenant_replication_enabled
   infrastructure_encryption_enabled = var.infrastructure_encryption_enabled
   shared_access_key_enabled         = var.shared_access_key_enabled
+  public_network_access_enabled     = var.public_network_access_enabled
   default_to_oauth_authentication   = var.default_to_oauth_authentication
-
   identity {
     type = "SystemAssigned"
   }
