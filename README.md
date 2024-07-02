@@ -43,6 +43,7 @@ No modules.
 | <a name="input_blob_last_access_time_enabled"></a> [blob\_last\_access\_time\_enabled](#input\_blob\_last\_access\_time\_enabled) | Controls whether blob last access time recording is enabled for container usage. | `bool` | `false` | no |
 | <a name="input_blob_versioning_enabled"></a> [blob\_versioning\_enabled](#input\_blob\_versioning\_enabled) | Controls whether blob object versioning is enabled. | `bool` | `false` | no |
 | <a name="input_container_delete_retention_days"></a> [container\_delete\_retention\_days](#input\_container\_delete\_retention\_days) | Retention days for deleted container. Valid value is between 1 and 365 (set to 0 to disable). | `number` | `7` | no |
+| <a name="input_cross_tenant_replication_enabled"></a> [cross\_tenant\_replication\_enabled](#input\_cross\_tenant\_replication\_enabled) | Enable cross tenant replication when needed and valid reason. Possible values are `true` or `false` | `bool` | `false` | no |
 | <a name="input_custom_404_path"></a> [custom\_404\_path](#input\_custom\_404\_path) | path from your repo root to your custom 404 page | `string` | `null` | no |
 | <a name="input_default_network_rule"></a> [default\_network\_rule](#input\_default\_network\_rule) | Specifies the default action of allow or deny when no other network rules match | `string` | `"Deny"` | no |
 | <a name="input_default_to_oauth_authentication"></a> [default\_to\_oauth\_authentication](#input\_default\_to\_oauth\_authentication) | Set default authentication to storage account content | `bool` | `false` | no |
