@@ -18,7 +18,7 @@ resource "azurerm_storage_account" "sa" {
   sftp_enabled                      = var.enable_sftp
   large_file_share_enabled          = var.enable_large_file_share
   allow_nested_items_to_be_public   = var.allow_nested_items_to_be_public
-  enable_https_traffic_only         = var.enable_https_traffic_only
+  https_traffic_only_enabled        = var.https_traffic_only_enabled
   min_tls_version                   = var.min_tls_version
   nfsv3_enabled                     = var.nfsv3_enabled
   cross_tenant_replication_enabled  = var.cross_tenant_replication_enabled
