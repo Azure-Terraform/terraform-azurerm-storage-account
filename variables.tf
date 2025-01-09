@@ -71,7 +71,7 @@ variable "enable_sftp" {
   default     = false
 }
 
-variable "enable_https_traffic_only" {
+variable "https_traffic_only_enabled" {
   description = "Forces HTTPS if enabled."
   type        = bool
   default     = true
