@@ -212,3 +212,9 @@ variable "container_delete_retention_days" {
   type        = number
   default     = 7
 }
+
+variable "allowed_copy_scope" {
+  description = "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet. Possible values are AAD and PrivateLink."
+  type        = string
+  default     = null
+}
