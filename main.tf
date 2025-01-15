@@ -26,6 +26,7 @@ resource "azurerm_storage_account" "sa" {
   shared_access_key_enabled         = var.shared_access_key_enabled
   public_network_access_enabled     = var.public_network_access_enabled
   default_to_oauth_authentication   = var.default_to_oauth_authentication
+  allowed_copy_scope                = var.allowed_copy_scope
   identity {
     type = "SystemAssigned"
   }
@@ -33,7 +34,7 @@ resource "azurerm_storage_account" "sa" {
   dynamic "blob_properties" {
     for_each = ((var.account_kind == "BlockBlobStorage" || var.account_kind == "StorageV2") ? [1] : [])
     content {
-      versioning_enabled = var.blob_versioning_enabled
+      versioning_enabled       = var.blob_versioning_enabled
       last_access_time_enabled = var.blob_last_access_time_enabled
 
       dynamic "delete_retention_policy" {
@@ -42,14 +43,14 @@ resource "azurerm_storage_account" "sa" {
           days = var.blob_delete_retention_days
         }
       }
-      
+
       dynamic "container_delete_retention_policy" {
         for_each = (var.container_delete_retention_days == 0 ? [] : [1])
         content {
           days = var.container_delete_retention_days
         }
       }
-      
+
       dynamic "cors_rule" {
         for_each = (var.blob_cors == null ? {} : var.blob_cors)
         content {
