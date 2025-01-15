@@ -26,7 +26,7 @@ resource "azurerm_storage_account" "sa" {
   shared_access_key_enabled         = var.shared_access_key_enabled
   public_network_access_enabled     = var.public_network_access_enabled
   default_to_oauth_authentication   = var.default_to_oauth_authentication
-  allowed_copy_scope                = var.allowed_copy_scope != null ? var.allowed_copy_scope : null
+  allowed_copy_scope                = var.allowed_copy_scope
   identity {
     type = "SystemAssigned"
   }
