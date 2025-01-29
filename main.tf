@@ -88,3 +88,25 @@ resource "azurerm_storage_encryption_scope" "scope" {
   source                             = coalesce(each.value.source, "Microsoft.Storage")
   infrastructure_encryption_required = coalesce(each.value.enable_infrastructure_encryption, var.infrastructure_encryption_enabled)
 }
+
+##  private end point
+resource "azurerm_private_endpoint" "storage_account" {
+  name                = azurerm_storage_account.sa.name
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  subnet_id           = var.private_endpoint.subnet_id
+
+  private_service_connection {
+    name                           = "${azurerm_storage_account.sa.id}-sa-private-service-connection-blob"
+    private_connection_resource_id = var.storage_account.sa.id
+    subresource_names              = [each.value]
+    is_manual_connection           = false
+  }
+
+  private_dns_zone_group {
+    name                 = "${azurerm_storage_account.sa.name}-private-dns-zone-group"
+    private_dns_zone_ids = var.private_endpoint.private_dns_zone_ids
+  }
+}
+
+

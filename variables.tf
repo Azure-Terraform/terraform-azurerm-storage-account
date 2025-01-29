@@ -218,3 +218,28 @@ variable "allowed_copy_scope" {
   type        = string
   default     = null
 }
+
+variable "airflow_integration" {
+  description = "Enable airflow integration for this namespace"
+  type = object({
+    enable      = bool
+    identity_id = string
+  })
+
+  default = {
+    enable      = false
+    identity_id = ""
+  }
+}
+
+variable "airflow_source_mode" {
+  description = "Enable airflow source mode for this namespace (allow airflow identity to create SAS Token to copy to designated disk)"
+  type = object({
+    enable      = bool
+    identity_id = string
+  })
+  default = {
+    enable      = false
+    identity_id = ""
+  }
+}
