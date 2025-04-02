@@ -78,8 +78,9 @@ variable "https_traffic_only_enabled" {
 }
 
 variable "public_network_access_enabled" {
-  description = "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+  description = "Allow or disallow public access to all blobs or containers in the storage account."
   type        = bool
+  default     = false
 }
 
 variable "min_tls_version" {
