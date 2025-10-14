@@ -146,3 +146,12 @@ resource "azurerm_storage_share_file" "sf" {
   content_md5      = filemd5(each.value.local_path)
   depends_on       = [azurerm_storage_account.sa, azurerm_storage_share.ss]
 }
+
+resource "azurerm_storage_object_replication" "sa_replication" {
+  source_storage_account_id      = azurerm_storage_account.src.id
+  destination_storage_account_id = azurerm_storage_account.dst.id
+  rules {
+    source_container_name      = azurerm_storage_container.src.name
+    destination_container_name = azurerm_storage_container.dst.name
+  }
+}
