@@ -89,6 +89,14 @@ resource "azurerm_storage_encryption_scope" "scope" {
   infrastructure_encryption_required = coalesce(each.value.enable_infrastructure_encryption, var.infrastructure_encryption_enabled)
 }
 
+resource "azurerm_storage_queue" "queues" {
+  for_each = var.queue_names != [] ? toset(var.queue_names) : []
+
+  name               = each.key
+  storage_account_id = azurerm_storage_account.sa.id
+  metadata           = lookup(var.queue_metadata_map, each.key, {})
+
+}
 resource "azurerm_role_assignment" "smb_contributor" {
   for_each = toset(var.smb_contributors)
 

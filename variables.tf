@@ -214,6 +214,17 @@ variable "container_delete_retention_days" {
   default     = 7
 }
 
+variable "queue_names" {
+  type        = list(string)
+  default     = []
+  description = "List of queue names to create. If empty, no queues will be created."
+}
+
+variable "queue_metadata_map" {
+  type = map(map(string))
+  default = {}
+  description = "Map of queue name to its metadata map"
+}
 variable "allowed_copy_scope" {
   description = "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet. Possible values are AAD and PrivateLink."
   type        = string
