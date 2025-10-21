@@ -146,3 +146,12 @@ resource "azurerm_storage_share_file" "sf" {
   content_md5      = filemd5(each.value.local_path)
   depends_on       = [azurerm_storage_account.sa, azurerm_storage_share.ss]
 }
+
+resource "azurerm_storage_queue" "queues" {
+  for_each = var.queue_names != [] ? toset(var.queue_names) : []
+
+  name               = each.key
+  storage_account_id = azurerm_storage_account.sa.id
+  metadata           = lookup(var.queue_metadata_map, each.key, {})
+
+}
