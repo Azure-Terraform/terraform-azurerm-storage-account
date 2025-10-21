@@ -89,7 +89,6 @@ resource "azurerm_storage_encryption_scope" "scope" {
   infrastructure_encryption_required = coalesce(each.value.enable_infrastructure_encryption, var.infrastructure_encryption_enabled)
 }
 
-
 resource "azurerm_role_assignment" "smb_contributor" {
   for_each = toset(var.smb_contributors)
 
