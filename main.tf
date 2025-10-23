@@ -99,7 +99,7 @@ resource "azurerm_role_assignment" "smb_contributor" {
 resource "azurerm_storage_share" "ss" {
   for_each = try({ for s in var.storage_shares : s.name => s }, {})
 
-  storage_account_id = azurerm_storage_account.sa.id
+  storage_account_name = azurerm_storage_account.sa.name
 
   name  = each.key
   quota = each.value.quota
