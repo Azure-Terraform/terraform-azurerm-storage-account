@@ -257,3 +257,18 @@ variable "storage_shares" {
   default  = []
   nullable = false
 }
+
+variable "object_replication_rules" {
+  description = "Object replication configuration. Map of replication rules where key is the rule name."
+  type = map(object({
+    source_storage_account_id      = string
+    destination_storage_account_id = string
+    rules = list(object({
+      source_container_name      = string
+      destination_container_name = string
+      copy_blobs_created_after   = optional(string)
+      filter_out_blobs_with_prefix = optional(list(string))
+    }))
+  }))
+  default = {}
+}

@@ -148,10 +148,18 @@ resource "azurerm_storage_share_file" "sf" {
 }
 
 resource "azurerm_storage_object_replication" "sa_replication" {
-  source_storage_account_id      = azurerm_storage_account.src.id
-  destination_storage_account_id = azurerm_storage_account.dst.id
-  rules {
-    source_container_name      = azurerm_storage_container.src.name
-    destination_container_name = azurerm_storage_container.dst.name
+  for_each = var.object_replication_rules
+
+  source_storage_account_id      = each.value.source_storage_account_id
+  destination_storage_account_id = each.value.destination_storage_account_id
+
+  dynamic "rules" {
+    for_each = each.value.rules
+    content {
+      source_container_name           = rules.value.source_container_name
+      destination_container_name      = rules.value.destination_container_name
+      copy_blobs_created_after        = rules.value.copy_blobs_created_after
+      filter_out_blobs_with_prefix    = rules.value.filter_out_blobs_with_prefix
+    }
   }
 }
