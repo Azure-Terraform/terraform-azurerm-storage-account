@@ -71,12 +71,6 @@ variable "enable_sftp" {
   default     = false
 }
 
-variable "https_traffic_only_enabled" {
-  description = "Forces HTTPS if enabled."
-  type        = bool
-  default     = true
-}
-
 variable "public_network_access_enabled" {
   description = "Allow or disallow public access to all blobs or containers in the storage account."
   type        = bool
