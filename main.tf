@@ -18,7 +18,6 @@ resource "azurerm_storage_account" "sa" {
   sftp_enabled                      = var.enable_sftp
   large_file_share_enabled          = var.enable_large_file_share
   allow_nested_items_to_be_public   = var.allow_nested_items_to_be_public
-  https_traffic_only_enabled        = var.https_traffic_only_enabled
   min_tls_version                   = var.min_tls_version
   nfsv3_enabled                     = var.nfsv3_enabled
   cross_tenant_replication_enabled  = var.cross_tenant_replication_enabled
@@ -100,7 +99,7 @@ resource "azurerm_role_assignment" "smb_contributor" {
 resource "azurerm_storage_share" "ss" {
   for_each = try({ for s in var.storage_shares : s.name => s }, {})
 
-  storage_account_id = azurerm_storage_account.sa.id
+  storage_account_name = azurerm_storage_account.sa.name
 
   name  = each.key
   quota = each.value.quota
@@ -145,4 +144,21 @@ resource "azurerm_storage_share_file" "sf" {
   content_type     = each.value.content_type
   content_md5      = filemd5(each.value.local_path)
   depends_on       = [azurerm_storage_account.sa, azurerm_storage_share.ss]
+}
+
+resource "azurerm_storage_object_replication" "sa_replication" {
+  for_each = var.object_replication_rules
+
+  source_storage_account_id      = each.value.source_storage_account_id
+  destination_storage_account_id = each.value.destination_storage_account_id
+
+  dynamic "rules" {
+    for_each = each.value.rules
+    content {
+      source_container_name           = rules.value.source_container_name
+      destination_container_name      = rules.value.destination_container_name
+      copy_blobs_created_after        = rules.value.copy_blobs_created_after
+      filter_out_blobs_with_prefix    = rules.value.filter_out_blobs_with_prefix
+    }
+  }
 }
