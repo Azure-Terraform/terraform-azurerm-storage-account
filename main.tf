@@ -64,14 +64,6 @@ resource "azurerm_storage_account" "sa" {
     }
   }
 
-  dynamic "static_website" {
-    for_each = local.static_website_enabled
-    content {
-      index_document     = var.index_path
-      error_404_document = var.custom_404_path
-    }
-  }
-
   network_rules {
     default_action             = var.default_network_rule
     ip_rules                   = values(var.access_list)
@@ -79,6 +71,15 @@ resource "azurerm_storage_account" "sa" {
     bypass                     = var.traffic_bypass
   }
 }
+
+resource "azurerm_storage_account_static_website" "static_website" {
+  count = local.static_website_enabled ? 1 : 0
+
+  storage_account_id = azurerm_storage_account.sa.id
+  index_document     = var.index_path
+  error_404_document = var.custom_404_path
+}
+
 ## azure reference https://docs.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal
 resource "azurerm_storage_encryption_scope" "scope" {
   for_each = var.encryption_scopes
