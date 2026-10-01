@@ -140,10 +140,10 @@ resource "azurerm_storage_share_file" "sf" {
   for_each = {
     for fs in local.share_files : fs.file_name => fs
   }
-  name             = each.value.file_name
-  storage_share_id = each.value.storage_share_url
-  source           = each.value.local_path
-  content_type     = each.value.content_type
-  content_md5      = filemd5(each.value.local_path)
-  depends_on       = [azurerm_storage_account.sa, azurerm_storage_share.ss]
+  name              = each.value.file_name
+  storage_share_url = each.value.storage_share_url
+  source            = each.value.local_path
+  content_type      = each.value.content_type
+  content_md5       = filemd5(each.value.local_path)
+  depends_on        = [azurerm_storage_account.sa, azurerm_storage_share.ss]
 }
