@@ -1,3 +1,5 @@
+> **Deprecated:** This repository is deprecated and is not recommended for new deployments.
+
 # Azure - Storage Account Module
 This module will create a storage account.
 
